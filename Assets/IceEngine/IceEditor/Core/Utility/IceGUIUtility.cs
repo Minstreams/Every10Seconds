@@ -722,11 +722,15 @@ namespace IceEditor
             var obj = EditorUtility.InstanceIDToObject(instanceId);
             if (obj == null) return;
             if (obj is not GameObject go) throw new Exception($"Hierarchy Item must be a gameobject! {obj}");
-            foreach ((Type t, var callback) in hierarchyItemGUICallbackMap)
+            using (AreaRaw(selectionRect)) using (HORIZONTAL)
             {
-                var comp = go.GetComponent(t);
-                if (comp == null) continue;
-                callback?.Invoke(comp, selectionRect);
+                Space();
+                foreach ((Type t, var callback) in hierarchyItemGUICallbackMap)
+                {
+                    var comp = go.GetComponent(t);
+                    if (comp == null) continue;
+                    callback?.Invoke(comp, selectionRect);
+                }
             }
         }
         #endregion
