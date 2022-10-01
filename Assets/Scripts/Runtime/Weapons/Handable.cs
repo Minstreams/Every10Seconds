@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace IceEngine
 {
-    public class Weapon : MonoBehaviour
+    public class Handable : MonoBehaviour
     {
         /// <summary>
         /// 瞄准的方向，影响转身判定，0为正前方，-90为正左方
@@ -12,5 +12,13 @@ namespace IceEngine
         [Range(-180f, 180f)] public float aimAngleOffset = 0;
         [Range(0f, 1f)] public float ikLeftHand = 0;
         [Range(0f, 1f)] public float ikRightHand = 0;
+        public GameObject pickablePrefab;
+
+        protected Vector3 AimPos => Ice.Gameplay.Player.TargetLook;
+        public virtual void OnUpdate() { }
+        public virtual void OnUse() { }
+        public virtual void OnEndUse() { }
+        public virtual void OnReload() { }
+        public virtual void OnPick(Pickable p) { }
     }
 }

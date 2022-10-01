@@ -4,14 +4,15 @@ using UnityEngine;
 
 namespace IceEngine
 {
-    [RequireComponent(typeof(WeaponEmpty))]
+    [RequireComponent(typeof(HandEmpty))]
     public class Player : CharacterBase
     {
         protected override void Awake()
         {
             base.Awake();
             DontDestroyOnLoad(gameObject);
-            weaponEmpty = GetComponent<WeaponEmpty>();
+            handEmpty = GetComponent<HandEmpty>();
+            currentInHand = handEmpty;
         }
 
         public void SpawnAt(Vector3 pos)
@@ -24,13 +25,64 @@ namespace IceEngine
         #endregion
 
         #region Weapon
-        public override Weapon CurrentWeapon => weaponEmpty;
-        WeaponEmpty weaponEmpty;
-        public Weapon weaponBasic;
-        public Weapon weaponMain;
+        public Transform posHand;
+        public Transform posWeaponBasic;
+        public Transform posWeaponMain;
+        public Transform posGrenade;
+        public Transform posItem;
+
+        HandEmpty handEmpty;
+        public override Handable CurrentInHand => currentInHand;
+
+        Handable currentInHand;
+        WeaponBasic weaponBasic;
+        Handable weaponMain;
 
         Vector3 aimTarget = Vector3.zero;
         public override Vector3 TargetLook => aimTarget;
+
+        public void SwitchTo(Handable h)
+        {
+            if (h == null) h = handEmpty;
+            if (currentInHand == h) return;
+            if (currentInHand != handEmpty)
+            {
+                if (currentInHand is WeaponBasic wb)
+                {
+                    wb.transform.SetParent(posWeaponBasic, false);
+                }
+            }
+            if (h != handEmpty) h.transform.SetParent(posHand, false);
+            currentInHand = h;
+        }
+        public void Drop(Handable h)
+        {
+            if (h == null) return;
+            Vector3 dropPos = posHand.position;
+            if (Physics.Raycast(dropPos, Vector3.down, out RaycastHit hit, 100, 1 << LayerMask.NameToLayer("Ground")))
+            {
+                dropPos = hit.point;
+            }
+            GameObject.Instantiate(h.pickablePrefab, dropPos, Quaternion.identity);
+            Destroy(h);
+        }
+        public void PickWeaponBasic(PickableBasic p)
+        {
+            DropWeaponBasic();
+            weaponBasic = GameObject.Instantiate(p.prefab).GetComponent<WeaponBasic>();
+            weaponBasic.OnPick(p);
+            SwitchToWeaponBasic();
+        }
+        public void SwitchToWeaponBasic()
+        {
+            SwitchTo(weaponBasic);
+            Ice.Gameplay.UIMgr.OnSwitchSlot(2);
+        }
+        public void DropWeaponBasic()
+        {
+            Drop(weaponBasic);
+            weaponBasic = null;
+        }
         #endregion
 
         void Update()
@@ -54,6 +106,21 @@ namespace IceEngine
             speed *= baseSpeed;
             transform.position += forward * speed * Time.deltaTime;
             Move(forward, speed, sightDir);
+
+            // Weapon
+            CurrentInHand.OnUpdate();
+            if (Input.GetMouseButtonDown(0))
+            {
+                CurrentInHand.OnUse();
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                CurrentInHand.OnEndUse();
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                CurrentInHand.OnReload();
+            }
         }
     }
 }

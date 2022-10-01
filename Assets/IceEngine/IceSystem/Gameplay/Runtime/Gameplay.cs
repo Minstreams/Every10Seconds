@@ -14,6 +14,8 @@ namespace Ice
 
             UIMgr.ShowNotification("Level Start");
             UIMgr.SetBattleUI(true);
+
+            Player.SwitchToWeaponBasic();
         }
         static void OnLevelEnd()
         {

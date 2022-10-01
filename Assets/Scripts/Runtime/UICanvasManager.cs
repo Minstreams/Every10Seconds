@@ -10,6 +10,7 @@ namespace IceEngine
         void Awake()
         {
             DontDestroyOnLoad(gameObject);
+            Awake_Battle();
         }
 
         #region Notification
@@ -49,12 +50,28 @@ namespace IceEngine
         #region Battle
         [Header("Battle")]
         public GameObject battleUIRoot;
-        public RectTransform slotMain;
-        public RectTransform slotBasic;
-        public RectTransform slotGrenade;
-        public RectTransform slotItem;
+        public Slot slotMain;
+        public Slot slotBasic;
+        public Slot slotGrenade;
+        public Slot slotItem;
         public Text hintText;
 
+        void Awake_Battle()
+        {
+            slotBasic.OnClick(() =>
+            {
+                Ice.Gameplay.Player.SwitchToWeaponBasic();
+            });
+        }
+        public void OnSwitchSlot(int index)
+        {
+            switch (index)
+            {
+                case 2:
+                    slotBasic.Select();
+                    break;
+            }
+        }
         public void SetBattleUI(bool on)
         {
             battleUIRoot.SetActive(on);

@@ -10,7 +10,7 @@ namespace IceEngine
     public abstract class CharacterBase : MonoBehaviour
     {
         #region Weapon
-        public abstract Weapon CurrentWeapon { get; }
+        public abstract Handable CurrentInHand { get; }
         #endregion
 
         #region Buff
@@ -40,7 +40,7 @@ namespace IceEngine
             float sightAngle = Vector3.SignedAngle(transform.forward, sightDir, Vector3.up);  //视线转角
 
             //反转
-            float angleOffset = CurrentWeapon.aimAngleOffset;
+            float angleOffset = CurrentInHand.aimAngleOffset;
             float tempDot = Vector3.Dot(sightDir, Quaternion.AngleAxis(angleOffset, Vector3.up) * forward);
             if (flip != tempDot < 0)
             {
@@ -86,12 +86,12 @@ namespace IceEngine
         public virtual float WeightLook => 1;
         public virtual Vector3 TargetLeftHand => TargetLook;
         public virtual Quaternion RotLeftHand => Quaternion.LookRotation(TargetLeftHand - transform.position) * Quaternion.AngleAxis(-90, Vector3.forward);
-        public float WeightLeftHandPos => CurrentWeapon.ikLeftHand;
-        public virtual float WeightLeftHandRot => CurrentWeapon.ikLeftHand;
+        public float WeightLeftHandPos => CurrentInHand.ikLeftHand;
+        public virtual float WeightLeftHandRot => CurrentInHand.ikLeftHand;
         public virtual Vector3 TargetRightHand => TargetLook;
         public virtual Quaternion RotRightHand => Quaternion.LookRotation(TargetRightHand - transform.position) * Quaternion.AngleAxis(-90, Vector3.forward);
-        public float WeightRightHandPos => CurrentWeapon.ikRightHand;
-        public float WeightRightHandRot => CurrentWeapon.ikRightHand;
+        public float WeightRightHandPos => CurrentInHand.ikRightHand;
+        public float WeightRightHandRot => CurrentInHand.ikRightHand;
 
         void OnAnimatorIK(int layerIndex)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace IceEngine
 {
-    public class WeaponEmpty : Weapon
+    public class WeaponBasic : Handable
     {
 
     }
