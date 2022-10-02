@@ -44,6 +44,7 @@ namespace IceEngine
                     else
                     {
                         AlignCamera();
+                        TraceCamaera();
                     }
                 }
                 else
@@ -75,7 +76,11 @@ namespace IceEngine
             var sv = SceneView.lastActiveSceneView;
             if (sv != null)
             {
-                sv.AlignViewToObject(cam.transform);
+                sv.camera.transform.position = cam.transform.position;
+                sv.pivot = transform.position;
+                sv.orthographic = cam.orthographic;
+                sv.camera.fieldOfView = cam.fieldOfView;
+                sv.camera.orthographicSize = cam.orthographicSize;
             }
         }
         public void AlignCamera()
@@ -85,9 +90,13 @@ namespace IceEngine
             if (sv != null)
             {
                 cam.transform.position = sv.camera.transform.position;
-                cam.transform.LookAt(transform);
+                cam.transform.rotation = sv.camera.transform.rotation;
+                var forward = cam.transform.forward;
+                cam.transform.localPosition = Vector3.Dot(forward, cam.transform.localPosition) * forward;
+                cam.orthographic = sv.camera.orthographic;
+                cam.orthographicSize = sv.camera.orthographicSize;
+                cam.fieldOfView = sv.camera.fieldOfView;
                 EditorUtility.SetDirty(cam);
-                sv.AlignViewToObject(cam.transform);
             }
         }
 #endif

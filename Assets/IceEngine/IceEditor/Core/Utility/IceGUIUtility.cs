@@ -735,6 +735,7 @@ namespace IceEditor
             if (E.type == EventType.Repaint && lastLayoutedHierarchyScene != scene) return;
             try
             {
+                selectionRect = selectionRect.MoveEdge(right: -16);
                 using (AreaRaw(selectionRect)) using (HORIZONTAL)
                 {
                     Space();

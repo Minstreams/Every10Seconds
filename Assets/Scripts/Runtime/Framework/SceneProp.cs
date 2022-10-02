@@ -27,13 +27,13 @@ namespace IceEngine
         protected virtual void Update()
         {
 #if UNITY_EDITOR
-            switch (type)
-            {
-                case PropType.Brick:
-                case PropType.Ground:
-                    transform.position = transform.position.Snap();
-                    break;
-            }
+            //switch (type)
+            //{
+            //    case PropType.Brick:
+            //    case PropType.Ground:
+            //        transform.position = transform.position.Snap();
+            //        break;
+            //}
 #endif
         }
 #if UNITY_EDITOR
