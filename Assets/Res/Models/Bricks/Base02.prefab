@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2346950974445865748}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Base02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7982392299699390586}
   - component: {fileID: 3773581567013145999}
   - component: {fileID: 8605003645088345398}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _QueueControl: -1
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0
     - _ThresRange: 0.1
