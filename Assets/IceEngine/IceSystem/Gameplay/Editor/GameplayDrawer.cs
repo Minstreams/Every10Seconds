@@ -41,5 +41,13 @@ namespace IceEditor.Internal
                 UnityEngine.Object.DestroyImmediate(sp.gameObject);
             }
         }
+        [HierarchyItemGUICallback]
+        static void ItemGUI(EnemySpawnPoint sp, Rect selectionRect)
+        {
+            if (IceButton("放于地面"))
+            {
+                sp.PutOnGround();
+            }
+        }
     }
 }

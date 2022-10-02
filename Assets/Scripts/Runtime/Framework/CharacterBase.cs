@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,19 +8,63 @@ namespace IceEngine
     /// <summary>
     /// 可移动的敌人和玩家，实现武器&移动&Buff接口
     /// </summary>
-    public abstract class CharacterBase : MonoBehaviour
+    public abstract class CharacterBase : TimerBehaviour
     {
-        #region Weapon
-        public abstract Handable CurrentInHand { get; }
+        #region Life
+        [Header("状态参数")]
+        public float maxHp = 100;
+        [NonSerialized] public float hp;
+        [NonSerialized] public bool isDead;
+        protected virtual void OnDrawGizmos()
+        {
+            if (!isDead)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireCube(transform.position + Vector3.up * 1.2f, new Vector3(1, 0.1f, 0.1f));
+                Gizmos.color = Color.green;
+                var h = hp / maxHp;
+                Gizmos.DrawCube(transform.position + new Vector3(-0.5f + 0.5f * h, 1.2f, 0), new Vector3(h, 0.1f, 0.1f));
+                Gizmos.color = Color.white;
+            }
+        }
+        public virtual void SpawnAt(Vector3 pos)
+        {
+            transform.position = pos;
+            isDead = false;
+            foreach (var r in GetComponentsInChildren<Rigidbody>())
+            {
+                r.isKinematic = true;
+            }
+            anim.enabled = true;
+        }
+        public virtual void Harm(float harm, Vector3 push)
+        {
+            if (isDead) return;
+            hp -= harm;
+            if (hp <= 0) Die(push);
+        }
+        public virtual void Die(Vector3 push)
+        {
+            isDead = true;
+            anim.enabled = false;
+            foreach (var r in GetComponentsInChildren<Rigidbody>())
+            {
+                r.isKinematic = false;
+            }
+        }
         #endregion
 
         #region Buff
         public List<Buff> buffList = new();
         #endregion
 
+        #region Weapon
+        public abstract Handable CurrentInHand { get; }
+        #endregion
+
         #region Movement
         const float rotateAcFactor = 0.2f;  //加速度转换常量
-        Animator anim;
+        [NonSerialized] public Animator anim;
         bool flip = false;  //转身
         float rotateParameter = 0;  //动画参数
         float rotateAc = 0;  //加速度

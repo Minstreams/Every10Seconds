@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace IceEngine
         [Range(0f, 1f)] public float ikLeftHand = 0;
         [Range(0f, 1f)] public float ikRightHand = 0;
         public GameObject pickablePrefab;
+        [NonSerialized] public CharacterBase owner;
 
         protected Vector3 AimPos => Ice.Gameplay.Player.TargetLook;
         public virtual void OnUpdate() { }

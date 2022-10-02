@@ -20,6 +20,9 @@ namespace IceEngine
         public float maxDis = 100;
         public int maxAmmo = 15;
         public GameObject slotPrefab;
+        public Transform aimMark;
+        public float harm = 20;
+        public float push = 1;
 
         SlotPistol slot;
         int ammo;
@@ -34,6 +37,8 @@ namespace IceEngine
         public override void OnUpdate()
         {
             transform.LookAt(AimPos);
+            aimMark.position = AimPos;
+            aimMark.LookAt(Camera.main.transform);
         }
         void FixedUpdate()
         {
@@ -52,10 +57,23 @@ namespace IceEngine
             slot.SetAmmo(--ammo);
 
             Vector3 ammoDir = (AimPos - gunPoint.position).normalized;
-            bool hited = Physics.Raycast(gunPoint.position, ammoDir, out var ammoHit, maxDis, -1);
-            if (hited)
+            Vector3 hitPoint = gunPoint.position + ammoDir * maxDis;
+            if (Physics.Raycast(gunPoint.position, ammoDir, out var hit, maxDis, ~(1 << 11)))
             {
-                //Harm(ammoHit, ammoDir);
+                hitPoint = hit.point;
+                if (hit.collider.CompareTag("Enemy"))
+                {
+                    if (hit.rigidbody != null)
+                    {
+                        hit.rigidbody.AddForce(ammoDir * push * 15, ForceMode.Impulse);
+                    }
+                    hit.collider.GetComponentInParent<Enemy>().Harm(harm, ammoDir * push);
+                }
+
+                hitParts.transform.position = hitPoint;
+                hitParts.transform.rotation = Quaternion.LookRotation(hit.normal);
+                hitParts.Emit(Random.Range(2, 5));
+                hitSound.Play();
             }
 
             // 效果
@@ -63,19 +81,12 @@ namespace IceEngine
             shotSound.Play();
             shotParts.Emit(Random.Range(2, 5));
             lineRenderer.SetPosition(0, gunPoint.position);
-            lineRenderer.SetPosition(1, hited ? ammoHit.point : gunPoint.position + ammoDir * maxDis);
+            lineRenderer.SetPosition(1, hitPoint);
             if (lineCoroutine != null)
             {
                 StopCoroutine(lineCoroutine);
             }
             lineCoroutine = StartCoroutine(lineFade());
-            if (hited)
-            {
-                hitParts.transform.position = ammoHit.point;
-                hitParts.transform.rotation = Quaternion.LookRotation(ammoHit.normal);
-                hitParts.Emit(Random.Range(2, 5));
-                hitSound.Play();
-            }
         }
         Coroutine lineCoroutine;
         IEnumerator lineFade()

@@ -13,18 +13,31 @@ namespace IceEngine
             DontDestroyOnLoad(gameObject);
             handEmpty = GetComponent<HandEmpty>();
             currentInHand = handEmpty;
+            cha = GetComponent<CharacterController>();
         }
 
-        public void SpawnAt(Vector3 pos)
+        #region Life
+        public override void SpawnAt(Vector3 pos)
         {
-            transform.position = pos;
+            base.SpawnAt(pos);
+            hp = maxHp;
         }
+        public override void Harm(float harm, Vector3 push)
+        {
+            base.Harm(harm, push);
+            cha.Move(push);
+        }
+        #endregion
+
         #region Move
         [Header("移动参数")]
         public float baseSpeed = 2;
+        public float gravity = 9.8f;
+        CharacterController cha;
         #endregion
 
         #region Weapon
+        [Header("武器参数")]
         public Transform posHand;
         public Transform posWeaponBasic;
         public Transform posWeaponMain;
@@ -70,6 +83,7 @@ namespace IceEngine
         {
             DropWeaponBasic();
             weaponBasic = GameObject.Instantiate(p.prefab).GetComponent<WeaponBasic>();
+            weaponBasic.owner = this;
             weaponBasic.OnPick(p);
             SwitchToWeaponBasic();
         }
@@ -87,9 +101,16 @@ namespace IceEngine
 
         void Update()
         {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var raycastHit, 100, -1))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var raycastHit, 100, ~(1 << 9 | 1 << 10)))
             {
-                aimTarget = raycastHit.point;
+                if (raycastHit.collider.CompareTag("Enemy"))
+                {
+                    aimTarget = raycastHit.collider.bounds.center;
+                }
+                else
+                {
+                    aimTarget = raycastHit.point;
+                }
             }
             Vector3 sightDir = (aimTarget - transform.position).normalized;
             Vector3 forward = sightDir;
@@ -104,7 +125,10 @@ namespace IceEngine
                 speed = (hh + vv) / (1 + (hh > vv ? vv / hh : hh / vv));    //速度的平方
             }
             speed *= baseSpeed;
-            transform.position += forward * speed * Time.deltaTime;
+            var vec = forward * speed;
+            var curY = cha.velocity.y;
+            if (curY <= 0) vec.y = curY - Time.deltaTime * gravity;
+            cha.Move(vec * Time.deltaTime);
             Move(forward, speed, sightDir);
 
             // Weapon

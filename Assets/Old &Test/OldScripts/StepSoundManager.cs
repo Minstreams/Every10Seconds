@@ -13,6 +13,8 @@ public class StepSoundManager : MonoBehaviour
 
     public void Step()
     {
+        if (stepSource == null) return;
+
         float v = cc.velocity.magnitude;
         float t = Mathf.Min(1.0f, v / maxVelocity);
 

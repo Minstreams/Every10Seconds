@@ -1,14 +1,18 @@
 ﻿using IceEngine;
+using System;
 using UnityEngine;
+using Obj = UnityEngine.Object;
 
 namespace Ice
 {
     public sealed class Gameplay : IceEngine.Framework.IceSystem<IceEngine.Internal.SettingGameplay>
     {
         #region Events
+        public static Action onMorning;
+        public static Action onEvening;
         static void OnLevelStart()
         {
-            var sp = Object.FindObjectOfType<SpawnPoint>();
+            var sp = Obj.FindObjectOfType<SpawnPoint>();
             var pos = sp != null ? sp.transform.position : Vector3.zero;
             Player.SpawnAt(pos);
 
@@ -16,6 +20,8 @@ namespace Ice
             UIMgr.SetBattleUI(true);
 
             Player.SwitchToWeaponBasic();
+
+            onEvening?.Invoke();
         }
         static void OnLevelEnd()
         {
@@ -31,7 +37,7 @@ namespace Ice
 #endif
             if (field == null)
             {
-                field = Object.FindObjectOfType<T>();
+                field = Obj.FindObjectOfType<T>();
                 if (field == null)
                 {
                     field = GameObject.Instantiate(prefab).GetComponent<T>();

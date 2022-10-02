@@ -24,10 +24,10 @@ namespace IceEngine
         }
 
 #if UNITY_EDITOR
-        void Start()
+        void Awake()
         {
             if (EditorApplication.isPlaying) return;
-            if (!PrefabUtility.IsAnyPrefabInstanceRoot(gameObject)) return;
+            if (gameObject.scene.path == "") return;
 
             var funcGo = GameObject.Find("功能") ?? new GameObject("功能");
             foreach (var o in funcGo.GetComponentsInChildren<SpawnPoint>())

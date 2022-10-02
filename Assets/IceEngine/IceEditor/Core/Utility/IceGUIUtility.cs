@@ -717,20 +717,32 @@ namespace IceEditor
             EditorApplication.hierarchyWindowItemOnGUI += OnHierarchyItemGUI;
         }
 
+        static string lastLayoutedHierarchyScene = "";
         static void OnHierarchyItemGUI(int instanceId, Rect selectionRect)
         {
             var obj = EditorUtility.InstanceIDToObject(instanceId);
             if (obj == null) return;
             if (obj is not GameObject go) throw new Exception($"Hierarchy Item must be a gameobject! {obj}");
-            using (AreaRaw(selectionRect)) using (HORIZONTAL)
+            var scene = go.scene.path;
+            if (E.type == EventType.Layout) lastLayoutedHierarchyScene = scene;
+            if (go.scene.path == "") return;
+            if (E.type == EventType.Repaint && lastLayoutedHierarchyScene != scene) return;
+            try
             {
-                Space();
-                foreach ((Type t, var callback) in hierarchyItemGUICallbackMap)
+                using (AreaRaw(selectionRect)) using (HORIZONTAL)
                 {
-                    var comp = go.GetComponent(t);
-                    if (comp == null) continue;
-                    callback?.Invoke(comp, selectionRect);
+                    Space();
+                    foreach ((Type t, var callback) in hierarchyItemGUICallbackMap)
+                    {
+                        var comp = go.GetComponent(t);
+                        if (comp == null) continue;
+                        callback?.Invoke(comp, selectionRect);
+                    }
                 }
+            }
+            catch
+            {
+                Debug.Log("AA");
             }
         }
         #endregion
