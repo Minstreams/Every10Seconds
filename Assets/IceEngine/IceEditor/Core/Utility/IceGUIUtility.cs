@@ -94,7 +94,13 @@ namespace IceEditor
             // 处理 Button
             foreach (var (text, action) in info.buttonList)
             {
-                if (Button(text)) action.Invoke(so.targetObject);
+                if (Button(text))
+                {
+                    foreach (var to in so.targetObjects)
+                    {
+                        action.Invoke(to);
+                    }
+                }
             }
         }
 
