@@ -22,5 +22,6 @@ namespace IceEngine
         public virtual void OnEndUse() { }
         public virtual void OnReload() { }
         public virtual void OnPick(Pickable p) { }
+        public virtual void OnCheckHit() { }
     }
 }

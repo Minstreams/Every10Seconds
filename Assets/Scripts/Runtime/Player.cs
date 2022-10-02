@@ -43,6 +43,7 @@ namespace IceEngine
         public Transform posWeaponMain;
         public Transform posGrenade;
         public Transform posItem;
+        public LayerMask aimMask;
 
         HandEmpty handEmpty;
         public override Handable CurrentInHand => currentInHand;
@@ -101,7 +102,7 @@ namespace IceEngine
 
         void Update()
         {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var raycastHit, 100, ~(1 << 9 | 1 << 10)))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var raycastHit, 100, aimMask))
             {
                 if (raycastHit.collider.CompareTag("Enemy"))
                 {

@@ -12,7 +12,7 @@ namespace IceEngine
         public float push = 1;
 
         float t = 0;
-        bool IsInRange => Vector3.Distance(Ice.Gameplay.Player.transform.position, transform.position) < range;
+        bool IsInRange => Vector3.Distance(Ice.Gameplay.Player.focusPoint.position, transform.position) < range;
         void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
@@ -41,7 +41,7 @@ namespace IceEngine
             owner.anim.SetTrigger("Attack");
         }
 
-        public void OnCheckHit()
+        public override void OnCheckHit()
         {
             if (IsInRange)
             {

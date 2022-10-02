@@ -22,6 +22,7 @@ namespace IceEngine
             Ice.Gameplay.onMorning -= OnMorning;
             Ice.Gameplay.onEvening -= OnEvening;
         }
+        protected bool IsMorning => Ice.Gameplay.isMorning;
         protected virtual void OnMorning() { }
         protected virtual void OnEvening() { }
     }

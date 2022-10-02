@@ -24,18 +24,25 @@ namespace IceEngine
         {
             if (isDead) return;
 
-            var p = Ice.Gameplay.Player.transform.position;
-            var pp = transform.position;
-            var sightDir = (p - pp).normalized;
-            nav.destination = p - sightDir * chaseDistance;
+            if (IsMorning)
+            {
+                Move(transform.forward, 0, transform.forward);
+            }
+            else
+            {
+                var p = Ice.Gameplay.Player.transform.position;
+                var pp = transform.position;
+                var sightDir = (p - pp).normalized;
+                nav.destination = p - sightDir * chaseDistance;
 
-            var vec = nav.velocity;
-            var speed = vec.magnitude;
-            var forward = speed == 0 ? transform.forward : vec / speed;
+                var vec = nav.velocity;
+                var speed = vec.magnitude;
+                var forward = speed == 0 ? transform.forward : vec / speed;
 
-            Move(forward, speed, sightDir);
+                Move(forward, speed, sightDir);
 
-            CurrentInHand.OnUpdate();
+                CurrentInHand.OnUpdate();
+            }
         }
 
 
@@ -46,7 +53,7 @@ namespace IceEngine
             nav.enabled = true;
             hitBox.enabled = true;
             aimBox.enabled = true;
-            weapon.enabled = true;
+            weapon.gameObject.SetActive(true);
         }
         public override void Harm(float harm, Vector3 push)
         {
@@ -56,13 +63,19 @@ namespace IceEngine
         }
         public override void Die(Vector3 push)
         {
+            if (isDead) return;
             base.Die(push);
             nav.ResetPath();
             nav.enabled = false;
             hitBox.enabled = false;
             aimBox.enabled = false;
-            weapon.enabled = false;
+            weapon.gameObject.SetActive(false);
         }
 
+        protected override void OnMorning()
+        {
+            if (isDead) return;
+            nav.ResetPath();
+        }
     }
 }

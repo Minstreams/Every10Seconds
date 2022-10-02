@@ -46,6 +46,58 @@ CapsuleCollider:
   m_Height: 1.1
   m_Direction: 1
   m_Center: {x: 0, y: 0.55, z: 0}
+--- !u!1 &5330068895785537216
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4683849045278731829}
+  - component: {fileID: 7032166863680181184}
+  m_Layer: 10
+  m_Name: Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4683849045278731829
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5330068895785537216}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5657704710206966805}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7032166863680181184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5330068895785537216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc0b30daf5df262488c34adf5d8b23db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimAngleOffset: 0
+  ikLeftHand: 0
+  ikRightHand: 0
+  pickablePrefab: {fileID: 0}
+  interval: 5
+  range: 1
+  harm: 5
+  push: 0.1
 --- !u!1 &5659067698820200001
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,7 +1297,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 78898d3f4f97e7b40a546b00f0e90090, type: 2}
+  - {fileID: 2100000, guid: 08d737a77915cc046bc5152b92a229de, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1783,6 +1835,7 @@ Transform:
   - {fileID: 5658023332102846579}
   - {fileID: 5664226320958144853}
   - {fileID: 5658172780165454205}
+  - {fileID: 4683849045278731829}
   m_Father: {fileID: 5657999200744843387}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1937,7 +1990,6 @@ GameObject:
   - component: {fileID: 5701365805375092619}
   - component: {fileID: 5753585993584911343}
   - component: {fileID: 5753585993584911340}
-  - component: {fileID: 6411391736484943485}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -2018,10 +2070,10 @@ MonoBehaviour:
   rotateRate: 0.974
   flipThreshold: 0.1
   rotateDyingRate: 0.96
-  weapon: {fileID: 6411391736484943485}
+  weapon: {fileID: 7032166863680181184}
   hitBox: {fileID: 4727701507691843960}
   aimBox: {fileID: 4400661639439331429}
-  chaseDistance: 0.7
+  chaseDistance: 0.5
 --- !u!195 &5753585993584911340
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2044,26 +2096,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &6411391736484943485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5660869396319601467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc0b30daf5df262488c34adf5d8b23db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aimAngleOffset: 0
-  ikLeftHand: 0
-  ikRightHand: 0
-  pickablePrefab: {fileID: 0}
-  interval: 5
-  range: 1
-  harm: 5
-  push: 0.1
 --- !u!1 &5660957210773871327
 GameObject:
   m_ObjectHideFlags: 0

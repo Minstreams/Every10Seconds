@@ -1463,13 +1463,16 @@ MonoBehaviour:
   rotateRate: 0.978
   flipThreshold: 0.1
   rotateDyingRate: 0.96
-  baseSpeed: 2
+  baseSpeed: 3
   gravity: 9.8
   posHand: {fileID: 4986665698490072}
   posWeaponBasic: {fileID: 0}
   posWeaponMain: {fileID: 0}
   posGrenade: {fileID: 0}
   posItem: {fileID: 0}
+  aimMask:
+    serializedVersion: 2
+    m_Bits: 3137
 --- !u!114 &114166066168210356
 MonoBehaviour:
   m_ObjectHideFlags: 0

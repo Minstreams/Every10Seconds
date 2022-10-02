@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace IceEngine
 {
-    public class Pickable : MonoBehaviour
+    [RequireComponent(typeof(SphereCollider))]
+    public class Pickable : PlayerTrigger
     {
         #region Static
         static int? layerPick;
@@ -78,20 +79,8 @@ namespace IceEngine
             Ice.Gameplay.UIMgr.ShowNotification("Pick!");
         }
 
-        void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                ToPick(this);
-            }
-        }
-        void OnTriggerExit(Collider other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                CancelPick(this);
-            }
-        }
+        protected override void OnPlayerEnter() => ToPick(this);
+        protected override void OnPlayerExit() => CancelPick(this);
 
 
         void OnDrawGizmos()

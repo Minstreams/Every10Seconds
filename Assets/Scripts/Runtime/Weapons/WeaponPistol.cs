@@ -23,6 +23,7 @@ namespace IceEngine
         public Transform aimMark;
         public float harm = 20;
         public float push = 1;
+        public LayerMask shotLayerMask;
 
         SlotPistol slot;
         int ammo;
@@ -58,7 +59,7 @@ namespace IceEngine
 
             Vector3 ammoDir = (AimPos - gunPoint.position).normalized;
             Vector3 hitPoint = gunPoint.position + ammoDir * maxDis;
-            if (Physics.Raycast(gunPoint.position, ammoDir, out var hit, maxDis, ~(1 << 11)))
+            if (Physics.Raycast(gunPoint.position, ammoDir, out var hit, maxDis, shotLayerMask))
             {
                 hitPoint = hit.point;
                 if (hit.collider.CompareTag("Enemy"))

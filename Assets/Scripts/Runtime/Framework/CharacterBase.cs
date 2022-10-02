@@ -45,6 +45,7 @@ namespace IceEngine
         }
         public virtual void Die(Vector3 push)
         {
+            if (isDead) return;
             isDead = true;
             anim.enabled = false;
             foreach (var r in GetComponentsInChildren<Rigidbody>())
@@ -60,6 +61,7 @@ namespace IceEngine
 
         #region Weapon
         public abstract Handable CurrentInHand { get; }
+        public virtual void OnCheckHit() => CurrentInHand.OnCheckHit();
         #endregion
 
         #region Movement

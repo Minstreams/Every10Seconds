@@ -7,25 +7,15 @@ namespace Ice
 {
     public sealed class Gameplay : IceEngine.Framework.IceSystem<IceEngine.Internal.SettingGameplay>
     {
+        public static LevelManager CurLevel { get; set; }
+
         #region Events
+        public static bool isMorning;
         public static Action onMorning;
         public static Action onEvening;
-        static void OnLevelStart()
+        public static void Escape()
         {
-            var sp = Obj.FindObjectOfType<SpawnPoint>();
-            var pos = sp != null ? sp.transform.position : Vector3.zero;
-            Player.SpawnAt(pos);
-
-            UIMgr.ShowNotification("Level Start");
-            UIMgr.SetBattleUI(true);
-
-            Player.SwitchToWeaponBasic();
-
-            onEvening?.Invoke();
-        }
-        static void OnLevelEnd()
-        {
-            UIMgr.SetBattleUI(false);
+            UIMgr.ShowNotification("Escape");
         }
         #endregion
 
