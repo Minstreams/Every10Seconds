@@ -12,11 +12,11 @@ namespace IceEngine
     public class EnemySpawnPoint : TimerBehaviour
     {
         public GameObject enemy;
-        public float interval = 10;
-        public float speed = 1;
-        public float health = 3;
+        [Label("间隔时间")] public float interval = 10;
+        [Label("速度")] public float speed = 1;
+        [Label("生命值")] public float health = 3;
         public Vector2 typeRage = Vector2.up;
-        public float range;
+        [Label("生成范围半径")] public float range;
         protected override void OnMorning()
         {
             StopAllCoroutines();
