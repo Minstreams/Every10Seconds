@@ -10,6 +10,7 @@ namespace IceEngine
         public enum PropType
         {
             Brick,
+            Ground,
         }
         public PropType type;
         public Transform brick;
@@ -29,6 +30,7 @@ namespace IceEngine
             switch (type)
             {
                 case PropType.Brick:
+                case PropType.Ground:
                     transform.position = transform.position.Snap();
                     break;
             }
@@ -38,9 +40,12 @@ namespace IceEngine
         [Button("随机旋转")]
         public void SetRandomRotation()
         {
-            float RA() => Random.Range(0, 4) * 90;
-            brick.rotation = Quaternion.Euler(RA(), RA(), RA());
-            UnityEditor.EditorUtility.SetDirty(brick);
+            if (type == PropType.Brick)
+            {
+                float RA() => Random.Range(0, 4) * 90;
+                brick.rotation = Quaternion.Euler(RA(), RA(), RA());
+                UnityEditor.EditorUtility.SetDirty(brick);
+            }
         }
 #endif
     }
