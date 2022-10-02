@@ -20,7 +20,7 @@ namespace IceEngine
             if (gameObject.scene.path == "") return;
 
             var funcGo = GameObject.Find("场景") ?? new GameObject("场景");
-            transform.SetParent(funcGo.transform, true);
+            if (!transform.IsChildOf(funcGo.transform)) transform.SetParent(funcGo.transform, true);
 #endif
         }
         protected virtual void Update()
