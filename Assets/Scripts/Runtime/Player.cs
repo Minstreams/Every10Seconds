@@ -105,6 +105,7 @@ namespace IceEngine
             Shader.SetGlobalVector("_PlayerPosition", transform.position);
 
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Debug.DrawRay(ray.origin, ray.direction * 100);
             if (Physics.Raycast(ray, out var raycastHit, 100, aimMask))
             {
                 if (raycastHit.collider.CompareTag("Enemy"))
