@@ -111,8 +111,8 @@ Material:
     - _Parallax: 0.005
     - _Power: 0.12
     - _PulsePower: 0.05
-    - _PulseRate: 0.03
-    - _PulseWidth: 0.15
+    - _PulseRate: 0.2
+    - _PulseWidth: 0.03
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1

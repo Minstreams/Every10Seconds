@@ -110,9 +110,9 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _Power: 0.08
-    - _PulsePower: 0.062
+    - _PulsePower: 0.288
     - _PulseRate: 0
-    - _PulseWidth: 0.09
+    - _PulseWidth: 0.36
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -121,7 +121,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _TimeOffset: 0.57
+    - _TimeOffset: -0.48
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:

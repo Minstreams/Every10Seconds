@@ -49,8 +49,9 @@ namespace IceEngine
         public override Handable CurrentInHand => currentInHand;
 
         Handable currentInHand;
-        WeaponBasic weaponBasic;
-        Handable weaponMain;
+        Weapon weaponBasic;
+        Weapon weaponMain;
+        Handable item;
 
         Vector3 aimTarget = Vector3.zero;
         public override Vector3 TargetLook => aimTarget;
@@ -61,9 +62,17 @@ namespace IceEngine
             if (currentInHand == h) return;
             if (currentInHand != handEmpty)
             {
-                if (currentInHand is WeaponBasic wb)
+                if (currentInHand == weaponBasic)
                 {
-                    wb.transform.SetParent(posWeaponBasic, false);
+                    h.transform.SetParent(posWeaponBasic, false);
+                }
+                else if (currentInHand == weaponMain)
+                {
+                    h.transform.SetParent(posWeaponMain, false);
+                }
+                else if (currentInHand == item)
+                {
+                    h.transform.SetParent(posItem, false);
                 }
             }
             if (h != handEmpty) h.transform.SetParent(posHand, false);
@@ -80,14 +89,37 @@ namespace IceEngine
             GameObject.Instantiate(h.pickablePrefab, dropPos, Quaternion.identity);
             Destroy(h);
         }
-        public void PickWeaponBasic(PickableBasic p)
+
+        public void PickWeaponGun(PickableGun p)
         {
-            DropWeaponBasic();
-            weaponBasic = GameObject.Instantiate(p.prefab).GetComponent<WeaponBasic>();
-            weaponBasic.owner = this;
-            weaponBasic.OnPick(p);
-            SwitchToWeaponBasic();
+            var weapon = GameObject.Instantiate(p.prefab).GetComponent<Weapon>();
+            weapon.owner = this;
+            weapon.OnPick(p);
+            if (p.type == WeaponSlotType.Basic)
+            {
+                DropWeaponBasic();
+                weaponBasic = weapon;
+                SwitchToWeaponBasic();
+            }
+            else if (p.type == WeaponSlotType.Main)
+            {
+                DropWeaponMain();
+                weaponMain = weapon;
+                SwitchToWeaponMain();
+            }
         }
+        // Main
+        public void SwitchToWeaponMain()
+        {
+            SwitchTo(weaponMain);
+            Ice.Gameplay.UIMgr.OnSwitchSlot(1);
+        }
+        public void DropWeaponMain()
+        {
+            Drop(weaponMain);
+            weaponMain = null;
+        }
+        // Basic
         public void SwitchToWeaponBasic()
         {
             SwitchTo(weaponBasic);
@@ -97,6 +129,17 @@ namespace IceEngine
         {
             Drop(weaponBasic);
             weaponBasic = null;
+        }
+        // Item
+        public void SwitchToItem()
+        {
+            SwitchTo(item);
+            Ice.Gameplay.UIMgr.OnSwitchSlot(3);
+        }
+        public void DropItem()
+        {
+            Drop(item);
+            item = null;
         }
         #endregion
 

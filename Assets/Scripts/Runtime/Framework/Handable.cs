@@ -22,6 +22,7 @@ namespace IceEngine
         public virtual void OnEndUse() { }
         public virtual void OnReload() { }
         public virtual void OnPick(Pickable p) { }
+        // 近战动画事件回调
         public virtual void OnCheckHit() { }
     }
 }
