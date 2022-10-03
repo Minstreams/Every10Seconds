@@ -102,6 +102,8 @@ namespace IceEngine
 
         void Update()
         {
+            Shader.SetGlobalVector("PlayerPosition", transform.position);
+
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out var raycastHit, 100, aimMask))
             {
