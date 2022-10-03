@@ -195,6 +195,18 @@ namespace IceEngine
             {
                 CurrentInHand.OnReload();
             }
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                SwitchToWeaponMain();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                SwitchToWeaponBasic();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                SwitchToItem();
+            }
         }
         public void Shoot()
         {

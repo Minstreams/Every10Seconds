@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c7dc9888f14c9547ba7bd53356c1858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimAngleOffset: 28
+  aimAngleOffset: 45
   ikLeftHand: 0
   ikRightHand: 1
   pickablePrefab: {fileID: 0}
@@ -300,6 +300,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2695874488545972533}
     m_Modifications:
+    - target: {fileID: 2735828345935591390, guid: aa190b767efbeeb43aa6046bd2084181,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d12aeffa0afc95048bba7e72b4a3ce92, type: 2}
     - target: {fileID: 5714644400514911921, guid: aa190b767efbeeb43aa6046bd2084181,
         type: 3}
       propertyPath: m_RootOrder
