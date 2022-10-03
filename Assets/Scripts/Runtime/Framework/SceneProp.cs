@@ -24,18 +24,18 @@ namespace IceEngine
             if (!transform.IsChildOf(funcGo.transform)) transform.SetParent(funcGo.transform, true);
 #endif
         }
-        protected virtual void Update()
-        {
-#if UNITY_EDITOR
-            //switch (type)
-            //{
-            //    case PropType.Brick:
-            //    case PropType.Ground:
-            //        transform.position = transform.position.Snap();
-            //        break;
-            //}
-#endif
-        }
+//        protected virtual void Update()
+//        {
+//#if UNITY_EDITOR
+//            //switch (type)
+//            //{
+//            //    case PropType.Brick:
+//            //    case PropType.Ground:
+//            //        transform.position = transform.position.Snap();
+//            //        break;
+//            //}
+//#endif
+//        }
 #if UNITY_EDITOR
         [Button("随机旋转")]
         public void SetRandomRotation()

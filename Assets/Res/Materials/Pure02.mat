@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Pure01
+  m_Name: Pure02
   m_Shader: {fileID: 4800000, guid: 85994b0e73fb48741a6554a22fabfbab, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -80,7 +80,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaThres: 0.5
-    - _Angle: 0.1
+    - _Angle: 0.901
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -115,7 +115,7 @@ Material:
     - _EmissionTarget: {r: 0, g: 0, b: 0, a: 0}
     - _MetallicColor: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Tint: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
+    - _Tint: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &7808473441390464148
 MonoBehaviour:

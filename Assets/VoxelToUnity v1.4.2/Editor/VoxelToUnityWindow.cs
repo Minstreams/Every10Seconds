@@ -898,15 +898,20 @@
 						_assetPrefab = PrefabUtility.CreateEmptyPrefab(_newPath);
 					}
 
-					for (int frame = 0; frame < frameNum; frame++) {
-						AssetDatabase.AddObjectToAsset(_mat[frame], _newPath);
-						AssetDatabase.AddObjectToAsset(_texture[frame], _newPath);
-						int num = _meshs[frame].Length;
-						for (int i = 0; i < num; i++) {
-							AssetDatabase.AddObjectToAsset(_meshs[frame][i], _newPath);
-						}
-						PrefabUtility.ReplacePrefab(_prefab, _assetPrefab, ReplacePrefabOptions.ReplaceNameBased);
-					}
+                    for (int frame = 0; frame < frameNum; frame++)
+                    {
+                        _mat[frame].globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
+                        AssetDatabase.AddObjectToAsset(_mat[frame], _newPath);
+                        AssetDatabase.AddObjectToAsset(_texture[frame], _newPath);
+                        int num = _meshs[frame].Length;
+                        for (int i = 0; i < num; i++)
+                        {
+                            AssetDatabase.AddObjectToAsset(_meshs[frame][i], _newPath);
+                        }
+                        IceEditor.Internal.GameplayDrawer.PrepareModel(_prefab);
+
+                        PrefabUtility.ReplacePrefab(_prefab, _assetPrefab, ReplacePrefabOptions.ReplaceNameBased);
+                    }
 
 					DestroyImmediate(_prefab, false);
 					for (int frame = 0; frame < frameNum; frame++) {

@@ -102,7 +102,8 @@ namespace IceEngine
 
         void Update()
         {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var raycastHit, 100, aimMask))
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out var raycastHit, 100, aimMask))
             {
                 if (raycastHit.collider.CompareTag("Enemy"))
                 {
@@ -112,6 +113,10 @@ namespace IceEngine
                 {
                     aimTarget = raycastHit.point;
                 }
+            }
+            else
+            {
+                aimTarget = ray.origin - ray.direction / ray.direction.y * ray.origin.y;
             }
             Vector3 sightDir = (aimTarget - transform.position).normalized;
             Vector3 forward = sightDir;

@@ -8,22 +8,13 @@ using SysSetting = IceEngine.Internal.SettingGameplay;
 
 namespace IceEditor.Internal
 {
-    internal sealed class GameplayDrawer : Framework.IceSystemDrawer<Sys, SysSetting>
+    public sealed class GameplayDrawer : Framework.IceSystemDrawer<Sys, SysSetting>
     {
         public override void OnToolBoxGUI()
         {
             if (Button("开始编辑场景"))
             {
                 Selection.activeObject = Setting.spawnPointPrefab;
-            }
-        }
-        [HierarchyItemGUICallback]
-        static void ItemGUI(CameraMgr mgr, Rect selectionRect)
-        {
-            if (UnityEditor.EditorApplication.isPlaying) return;
-            if (IceButton("对齐"))
-            {
-                mgr.AlignCamera();
             }
         }
         [HierarchyItemGUICallback]
@@ -48,6 +39,34 @@ namespace IceEditor.Internal
             {
                 sp.PutOnGround();
             }
+        }
+
+        [MenuItem("Assets/准备模型")]
+        static void PrepareModel()
+        {
+            foreach (var go in Selection.gameObjects)
+            {
+                PrepareModel(go);
+                EditorUtility.SetDirty(go);
+            }
+        }
+
+        public static void PrepareModel(GameObject go)
+        {
+            if (go.GetComponent<SceneProp>() != null) return;
+            // Model
+            var model = go.transform.GetChild(0).gameObject;
+            // Layer
+            model.layer = go.layer = LayerMask.NameToLayer("Ground");
+            // Static
+            model.isStatic = go.isStatic = true;
+            // Component
+            go.AddComponent<SceneProp>().type = SceneProp.PropType.Ground;
+            // Collider
+            model.AddComponent<BoxCollider>();
+            // Material
+            //model.GetComponent<Renderer>().sharedMaterial.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
+
         }
     }
 }
