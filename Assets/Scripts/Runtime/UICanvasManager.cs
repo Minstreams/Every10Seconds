@@ -141,11 +141,11 @@ namespace IceEngine
                 c.rect.anchorMin = new Vector2(0, anchorY);
                 c.rect.anchorMax = new Vector2(1, anchorY);
                 c.SetText(cs[i].content);
-                int id = i;
+                var cc = cs[i];
                 c.btn.onClick.AddListener(() =>
                 {
-                    Ice.Gameplay.ToDialogBlock(id);
-                    cs[i].action?.Invoke();
+                    Ice.Gameplay.ToDialogBlock(cc.nextId);
+                    cc.action?.Invoke();
                 });
                 choices.Add(c);
             }

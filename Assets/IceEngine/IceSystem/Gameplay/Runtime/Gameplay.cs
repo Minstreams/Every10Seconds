@@ -77,6 +77,7 @@ namespace Ice
 [Serializable]
 public class Dialog
 {
+    public Condition condition = new();
     public List<DialogBlock> blockList = new();
 }
 [Serializable]
@@ -91,4 +92,15 @@ public class DialogChoice
     public string content;
     public int nextId;
     public UnityEvent action;
+}
+
+[Serializable]
+public class Condition
+{
+    public bool alwaysTrue;
+    public bool IsConditionMeet()
+    {
+        if (alwaysTrue) return true;
+        return false;
+    }
 }

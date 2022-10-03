@@ -29,14 +29,17 @@ namespace IceEngine
                 if (pp == p) return;
                 if (pp.priority < p.priority)
                 {
-                    if (i == 0) OnCancelPick(pp);
+                    if (i == 0)
+                    {
+                        OnCancelPick(pp);
+                        OnPrePick(p);
+                    }
                     toPickList.Insert(i, p);
-                    OnPrePick(p);
                     return;
                 }
             }
+            if (toPickList.Count == 0) OnPrePick(p);
             toPickList.Add(p);
-            OnPrePick(p);
         }
         public static void CancelPick(Pickable p)
         {
