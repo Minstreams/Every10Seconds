@@ -7,17 +7,15 @@ namespace IceEngine
 {
     public class Door : Pickable
     {
-        public Collider doorCollider;
-        public UnityAction onOpen;
+        public GameObject doorObj;
         public override void OnPick()
         {
-            doorCollider.enabled = false;
-            onOpen?.Invoke();
+            doorObj.SetActive(false);
         }
         protected override void OnPlayerExit()
         {
             base.OnPlayerExit();
-            doorCollider.enabled = true;
+            doorObj.SetActive(true);
         }
     }
 }
