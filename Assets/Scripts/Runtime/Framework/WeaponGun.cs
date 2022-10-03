@@ -65,8 +65,16 @@ namespace IceEngine
             slot = uiSlot.Load(slotPrefab).GetComponent<SlotGun>();
             slot.SetAmmo(ammo);
             slot.SetMag(mag);
+        }
 
+        public override void OnSwitchOn()
+        {
             reloadedSound.Play();
+            aimMark.gameObject.SetActive(true);
+        }
+        public override void OnSwitchOff()
+        {
+            aimMark.gameObject.SetActive(false);
         }
 
         public override void OnUpdate()

@@ -24,5 +24,7 @@ namespace IceEngine
         public virtual void OnPick(Pickable p) { }
         // 近战动画事件回调
         public virtual void OnCheckHit() { }
+        public virtual void OnSwitchOff() { }
+        public virtual void OnSwitchOn() { }
     }
 }

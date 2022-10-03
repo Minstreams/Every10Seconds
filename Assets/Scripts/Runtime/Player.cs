@@ -74,8 +74,14 @@ namespace IceEngine
                 {
                     currentInHand.transform.SetParent(posItem, false);
                 }
+
+                currentInHand.OnSwitchOff();
             }
-            if (h != handEmpty) h.transform.SetParent(posHand, false);
+            if (h != handEmpty)
+            {
+                h.transform.SetParent(posHand, false);
+                h.OnSwitchOn();
+            }
             currentInHand = h;
         }
         public void Drop(Handable h)
