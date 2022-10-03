@@ -50,6 +50,16 @@ namespace IceEditor.Internal
                 EditorUtility.SetDirty(go);
             }
         }
+        [MenuItem("Assets/刷ShadowCaster")]
+        static void PrepareModelShadow()
+        {
+            foreach (var go in Selection.gameObjects)
+            {
+                var model = go.transform.GetChild(0).gameObject;
+                model.GetComponent<Renderer>().staticShadowCaster = true;
+                EditorUtility.SetDirty(go);
+            }
+        }
 
         public static void PrepareModel(GameObject go)
         {
@@ -65,8 +75,8 @@ namespace IceEditor.Internal
             // Collider
             model.AddComponent<BoxCollider>();
             // Material
+            model.GetComponent<Renderer>().staticShadowCaster = true;
             //model.GetComponent<Renderer>().sharedMaterial.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
-
         }
     }
 }
