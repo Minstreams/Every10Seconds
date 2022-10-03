@@ -22,6 +22,9 @@ namespace IceEngine
         }
         void Start()
         {
+            // 隐藏鼠标
+            Cursor.visible = false;
+
             // 初始化战斗UI
             UIMgr.SetBattleUI(true);
 

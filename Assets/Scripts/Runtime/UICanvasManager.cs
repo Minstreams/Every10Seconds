@@ -7,6 +7,8 @@ namespace IceEngine
 {
     public class UICanvasManager : MonoBehaviour
     {
+        Player Player => Ice.Gameplay.Player;
+
         void Awake()
         {
             DontDestroyOnLoad(gameObject);
@@ -55,12 +57,14 @@ namespace IceEngine
         public Slot slotGrenade;
         public Slot slotItem;
         public Text hintText;
+        public RectTransform hpBarRect;
+        public RectTransform hpBar;
 
         void Awake_Battle()
         {
             slotBasic.OnClick(() =>
             {
-                Ice.Gameplay.Player.SwitchToWeaponBasic();
+                Player.SwitchToWeaponBasic();
             });
         }
         public void OnSwitchSlot(int index)
@@ -77,8 +81,8 @@ namespace IceEngine
             battleUIRoot.SetActive(on);
             if (on)
             {
-
                 hintText.text = "";
+                hpBarRect.sizeDelta = new Vector2(Player.maxHp / 100 * 128, 32);
                 rBattleUpdate = StartCoroutine(RunBattleUpdate());
             }
             else
@@ -96,6 +100,7 @@ namespace IceEngine
             while (true)
             {
                 Pickable.OnBattleUpdate();
+                hpBar.anchorMin = new Vector2(1 - Player.hp / Player.maxHp, 0);
                 yield return 0;
             }
         }
