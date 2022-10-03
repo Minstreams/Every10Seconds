@@ -12,13 +12,15 @@ namespace IceEngine
         public Camera cam;
         [Range(0, 1)]
         public float moveRate = 0.1f;
-        public float targetOrthographicSize = 2;
+        public static float targetOrthographicSize = 2;
 
 
         void Update()
         {
             var offset = Ice.Gameplay.Player.focusPoint.position - transform.position;
-            transform.Translate(offset * (1 - Mathf.Pow(1 - moveRate, Time.deltaTime)));
+            var t = (1 - Mathf.Pow(1 - moveRate, Time.deltaTime));
+            transform.Translate(offset * t);
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetOrthographicSize, t);
         }
 
         [Button]

@@ -401,10 +401,10 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0
-    - _ThresRange: 0.1
+    - _ThresRange: 0.047
     m_Colors:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionTarget: {r: 0, g: 0, b: 0, a: 0}
-    - _MetallicColor: {r: 0, g: 0, b: 0, a: 0}
+    - _MetallicColor: {r: 0.3254901, g: 0.34901953, b: 0.3254901, a: 1}
     - _Tint: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
