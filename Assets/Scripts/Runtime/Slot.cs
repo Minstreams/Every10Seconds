@@ -10,8 +10,11 @@ namespace IceEngine
     {
         public Button slotButton;
         public RectTransform container;
-        public GameObject selection;
         static List<Slot> slots = new();
+        public Color slotEmpty;
+        public Color slotNormal;
+        public Color slotSelected;
+        Color slotUnselected => curItem == null ? slotEmpty : slotNormal;
         void Awake()
         {
             slots.Add(this);
@@ -26,8 +29,15 @@ namespace IceEngine
         }
         public void Select()
         {
-            foreach (var s in slots) s.selection.SetActive(false);
-            selection.SetActive(true);
+            foreach (var s in slots) s.SetColor(s.slotUnselected);
+            SetColor(slotSelected);
+        }
+
+        void SetColor(Color c)
+        {
+            var cs = slotButton.colors;
+            cs.normalColor = c;
+            slotButton.colors = cs;
         }
 
         GameObject curItem;
