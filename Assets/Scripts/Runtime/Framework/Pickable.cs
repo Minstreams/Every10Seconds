@@ -5,7 +5,7 @@ using UnityEngine;
 namespace IceEngine
 {
     [RequireComponent(typeof(SphereCollider))]
-    public class Pickable : PlayerTrigger
+    public abstract class Pickable : PlayerTrigger
     {
         #region Static
         static int? layerPick;
@@ -83,10 +83,7 @@ namespace IceEngine
         public string hint = "捡起";
 
         // Configurations
-        public virtual void OnPick()
-        {
-            Ice.Gameplay.UIMgr.ShowNotification("Pick!");
-        }
+        public abstract void OnPick();
 
         protected override void OnPlayerEnter() => ToPick(this);
         protected override void OnPlayerExit() => CancelPick(this);
