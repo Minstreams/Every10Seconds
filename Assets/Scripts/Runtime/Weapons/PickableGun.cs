@@ -15,7 +15,6 @@ namespace IceEngine
         public int mag = 15;
         public override void OnPick()
         {
-            Ice.Gameplay.UIMgr.ShowNotification("捡起了一个手枪");
             Ice.Gameplay.Player.PickWeaponGun(this);
             Destroy(gameObject);
         }

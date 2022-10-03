@@ -104,3 +104,6 @@ public class Condition
         return false;
     }
 }
+
+[System.Serializable]
+public class FloatEvent : UnityEngine.Events.UnityEvent<float> { }

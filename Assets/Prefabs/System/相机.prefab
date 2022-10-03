@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 9212147977230003477}
   moveRate: 0.933
+  camDis: 1.6
 --- !u!1 &9212147977230003483
 GameObject:
   m_ObjectHideFlags: 0

@@ -62,9 +62,17 @@ namespace IceEngine
 
         void Awake_Battle()
         {
+            slotMain.OnClick(() =>
+            {
+                Player.SwitchToWeaponMain();
+            });
             slotBasic.OnClick(() =>
             {
                 Player.SwitchToWeaponBasic();
+            });
+            slotItem.OnClick(() =>
+            {
+                Player.SwitchToItem();
             });
             CloseDialog();
         }
@@ -72,8 +80,17 @@ namespace IceEngine
         {
             switch (index)
             {
+                case 1:
+                    slotMain.Select();
+                    break;
                 case 2:
                     slotBasic.Select();
+                    break;
+                case 3:
+                    slotItem.Select();
+                    break;
+                case 4:
+                    slotGrenade.Select();
                     break;
             }
         }

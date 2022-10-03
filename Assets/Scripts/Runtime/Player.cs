@@ -64,15 +64,15 @@ namespace IceEngine
             {
                 if (currentInHand == weaponBasic)
                 {
-                    h.transform.SetParent(posWeaponBasic, false);
+                    currentInHand.transform.SetParent(posWeaponBasic, false);
                 }
                 else if (currentInHand == weaponMain)
                 {
-                    h.transform.SetParent(posWeaponMain, false);
+                    currentInHand.transform.SetParent(posWeaponMain, false);
                 }
                 else if (currentInHand == item)
                 {
-                    h.transform.SetParent(posItem, false);
+                    currentInHand.transform.SetParent(posItem, false);
                 }
             }
             if (h != handEmpty) h.transform.SetParent(posHand, false);

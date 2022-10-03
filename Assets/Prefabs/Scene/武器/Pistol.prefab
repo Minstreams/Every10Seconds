@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 7617627843412973666}
   - component: {fileID: 6374923569062830150}
   m_Layer: 7
-  m_Name: "\u624B\u67AA"
+  m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,5 +144,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshObj: {fileID: 6863751925024902530}
   priority: 0
-  hint: "\u6361\u8D77"
+  hint: Pick up Pistol
+  type: 0
   prefab: {fileID: 1612506724248170, guid: 6cbed353ee4564b46acd950aeda34b72, type: 3}
+  ammo: 15
+  mag: 15

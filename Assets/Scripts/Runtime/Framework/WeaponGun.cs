@@ -10,6 +10,7 @@ namespace IceEngine
         [Header("效果")]
         public AudioSource shotSound;
         public ParticleSystem shotParts;
+        public ParticleSystem ammoParts;
         public Vector2Int shotPartsEmitRange = new Vector2Int(2, 5);
 
         public AudioSource hitSound;
@@ -64,6 +65,8 @@ namespace IceEngine
             slot = uiSlot.Load(slotPrefab).GetComponent<SlotGun>();
             slot.SetAmmo(ammo);
             slot.SetMag(mag);
+
+            reloadedSound.Play();
         }
 
         public override void OnUpdate()
@@ -124,6 +127,7 @@ namespace IceEngine
         }
         public void PlayShotEffectAt(Vector3 hitPoint)
         {
+            ammoParts.Emit(1);
             model.Translate(Vector3.back * forceBackward, Space.Self);
             shotParts.Emit(UnityEngine.Random.Range(shotPartsEmitRange.x, shotPartsEmitRange.y));
             shotSound.Play();

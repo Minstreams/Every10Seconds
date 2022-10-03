@@ -1258,6 +1258,7 @@ Transform:
   - {fileID: 4396597906533452}
   - {fileID: 4951395544077674}
   - {fileID: 4247116245830978}
+  - {fileID: 5615606604031169234}
   m_Father: {fileID: 4372599693638724}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1466,8 +1467,8 @@ MonoBehaviour:
   baseSpeed: 3
   gravity: 9.8
   posHand: {fileID: 4986665698490072}
-  posWeaponBasic: {fileID: 0}
-  posWeaponMain: {fileID: 0}
+  posWeaponBasic: {fileID: 4938905180366354862}
+  posWeaponMain: {fileID: 5615606604031169234}
   posGrenade: {fileID: 0}
   posItem: {fileID: 0}
   aimMask:
@@ -2317,3 +2318,34 @@ Transform:
   m_Father: {fileID: 4521798819244054}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 180, z: 0}
+--- !u!1 &5682026394971583400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5615606604031169234}
+  m_Layer: 9
+  m_Name: PosWeaponMain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5615606604031169234
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5682026394971583400}
+  m_LocalRotation: {x: -0.45717055, y: 0.45717052, z: 0.5394396, w: 0.5394397}
+  m_LocalPosition: {x: -0, y: -0.203, z: -0.264}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4218713496361002}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: -80.562, y: 0, z: 90}
