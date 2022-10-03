@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2983942958075587737}
   - component: {fileID: -153365432481055034}
+  - component: {fileID: 461361780512633171}
   m_Layer: 6
   m_Name: Base07
   m_TagString: Untagged
@@ -46,6 +47,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: -0.5, z: 0}
+--- !u!114 &461361780512633171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3628393040436584643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75a765d655b227544938f504dd2685df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  brick: {fileID: 0}
 --- !u!1 &7075784469632394359
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +189,7 @@ Material:
     - _Smoothness: 1
     - _ThresRange: 0.1
     m_Colors:
-    - _EmissionColor: {r: 0.32719696, g: 1.2896663, b: 2.2521355, a: 1}
+    - _EmissionColor: {r: 2.2521355, g: 1.3486154, b: 0.33015597, a: 1}
     - _EmissionTarget: {r: 0.20000002, g: 0.6509804, b: 0.72156864, a: 1}
     - _MetallicColor: {r: 0, g: 0, b: 0, a: 0}
     - _Tint: {r: 1, g: 1, b: 1, a: 1}

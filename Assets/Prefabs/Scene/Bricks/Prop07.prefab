@@ -189,8 +189,8 @@ Material:
     - _Smoothness: 0
     - _ThresRange: 0.1
     m_Colors:
-    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionTarget: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 2.9960785, g: 1.7568628, b: 0.78431374, a: 1}
+    - _EmissionTarget: {r: 1, g: 0.18396229, b: 0.18396229, a: 1}
     - _MetallicColor: {r: 0, g: 0, b: 0, a: 0}
     - _Tint: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

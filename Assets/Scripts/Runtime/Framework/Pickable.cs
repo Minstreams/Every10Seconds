@@ -48,7 +48,14 @@ namespace IceEngine
                 var pp = toPickList[i];
                 if (pp == p)
                 {
-                    if (i == 0) OnCancelPick(p);
+                    if (i == 0)
+                    {
+                        OnCancelPick(p);
+                        if (toPickList.Count > 1)
+                        {
+                            OnPrePick(toPickList[1]);
+                        }
+                    }
                     toPickList.RemoveAt(i);
                     return;
                 }

@@ -1472,7 +1472,7 @@ MonoBehaviour:
   posItem: {fileID: 0}
   aimMask:
     serializedVersion: 2
-    m_Bits: 3137
+    m_Bits: 11329
 --- !u!114 &114166066168210356
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -108,7 +108,7 @@ namespace IceEngine
         #endregion
 
         #region Dialog
-        public const float choiceHeight = 128;
+        public const float choiceHeight = 128 + 16;
 
         public GameObject choicePrefab;
         public GameObject dialogObj;
@@ -131,9 +131,11 @@ namespace IceEngine
             }
             choices.Clear();
 
+            npcContent.text = block.content;
             var cs = block.dialogChoices;
             var size = choiceRect.sizeDelta;
             size.y = choiceHeight * cs.Count;
+            choiceRect.sizeDelta = size;
             for (int i = 0; i < cs.Count; i++)
             {
                 var c = GameObject.Instantiate(choicePrefab, choiceRect).GetComponent<UIDialogChoice>();
