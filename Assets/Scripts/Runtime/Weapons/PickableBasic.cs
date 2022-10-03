@@ -15,6 +15,7 @@ namespace IceEngine
         {
             Ice.Gameplay.UIMgr.ShowNotification("捡起了一个手枪");
             Ice.Gameplay.Player.PickWeaponBasic(this);
+            Destroy(gameObject);
         }
     }
 }

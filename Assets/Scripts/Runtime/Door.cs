@@ -1,21 +1,23 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace IceEngine
 {
-    public class Door : MonoBehaviour
+    public class Door : Pickable
     {
-        // Start is called before the first frame update
-        void Start()
+        public Collider doorCollider;
+        public UnityAction onOpen;
+        public override void OnPick()
         {
-        
+            doorCollider.enabled = false;
+            onOpen?.Invoke();
         }
-
-        // Update is called once per frame
-        void Update()
+        protected override void OnPlayerExit()
         {
-        
+            base.OnPlayerExit();
+            doorCollider.enabled = true;
         }
     }
 }

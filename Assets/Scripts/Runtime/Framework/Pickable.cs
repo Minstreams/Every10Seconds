@@ -59,9 +59,8 @@ namespace IceEngine
                 {
                     var p = toPickList[0];
                     OnCancelPick(p);
-                    p.OnPick();
                     toPickList.RemoveAt(0);
-                    Destroy(p.gameObject);
+                    p.OnPick();
                     if (toPickList.Count > 0) OnPrePick(toPickList[0]);
                 }
             }
@@ -89,7 +88,7 @@ namespace IceEngine
             if (col != null)
             {
                 Gizmos.color = Color.yellow;
-                Gizmos.DrawWireSphere(col.transform.position, col.radius);
+                Gizmos.DrawWireSphere(col.transform.position + col.center, col.radius);
                 Gizmos.color = Color.white;
             }
         }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7555902491581290516}
   - component: {fileID: 7260211794199639421}
   - component: {fileID: 3213374321785401044}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6247435265178610458}
   - component: {fileID: 1180704825084779267}
-  m_Layer: 6
+  - component: {fileID: 8891178118181284036}
+  - component: {fileID: 1885747420388713771}
+  m_Layer: 12
   m_Name: Prop10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,6 +146,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   brick: {fileID: 0}
+--- !u!135 &8891178118181284036
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843637313450179215}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.2
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1885747420388713771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843637313450179215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5fb77629afe04f428576391c38f686b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshObj: {fileID: 697697887992662693}
+  priority: 1
+  hint: Open Door
+  doorCollider: {fileID: 3213374321785401044}
 --- !u!28 &-3853568623647876249
 Texture2D:
   m_ObjectHideFlags: 0
