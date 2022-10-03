@@ -142,18 +142,18 @@ namespace IceEngine
 
             // Weapon
             CurrentInHand.OnUpdate();
-            if (Input.GetMouseButtonDown(0))
-            {
-                CurrentInHand.OnUse();
-            }
-            if (Input.GetMouseButtonUp(0))
-            {
-                CurrentInHand.OnEndUse();
-            }
             if (Input.GetKeyDown(KeyCode.R))
             {
                 CurrentInHand.OnReload();
             }
+        }
+        public void Shoot()
+        {
+            CurrentInHand.OnUse();
+        }
+        public void ReleaseShoot()
+        {
+            CurrentInHand.OnEndUse();
         }
     }
 }

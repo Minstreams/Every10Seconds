@@ -66,6 +66,7 @@ namespace IceEngine
             {
                 Player.SwitchToWeaponBasic();
             });
+            CloseDialog();
         }
         public void OnSwitchSlot(int index)
         {
@@ -103,6 +104,60 @@ namespace IceEngine
                 hpBar.anchorMin = new Vector2(1 - Player.hp / Player.maxHp, 0);
                 yield return 0;
             }
+        }
+        #endregion
+
+        #region Dialog
+        public const float choiceHeight = 128;
+
+        public GameObject choicePrefab;
+        public GameObject dialogObj;
+        public Text npcName;
+        public RectTransform choiceRect;
+        public Text npcContent;
+        readonly List<UIDialogChoice> choices = new();
+        public void SetDialogNPC(string name)
+        {
+            npcName.text = name;
+        }
+        public void DisplayDialogBlock(DialogBlock block)
+        {
+            dialogObj.SetActive(true);
+
+            // Load Choices
+            foreach (var c in choices)
+            {
+                Destroy(c.gameObject);
+            }
+            choices.Clear();
+
+            var cs = block.dialogChoices;
+            var size = choiceRect.sizeDelta;
+            size.y = choiceHeight * cs.Count;
+            for (int i = 0; i < cs.Count; i++)
+            {
+                var c = GameObject.Instantiate(choicePrefab, choiceRect).GetComponent<UIDialogChoice>();
+                var anchorY = (i + 1.0f) / (cs.Count + 1);
+                c.rect.anchorMin = new Vector2(0, anchorY);
+                c.rect.anchorMax = new Vector2(1, anchorY);
+                c.SetText(cs[i].content);
+                int id = i;
+                c.btn.onClick.AddListener(() =>
+                {
+                    Ice.Gameplay.ToDialogBlock(id);
+                    cs[i].action?.Invoke();
+                });
+                choices.Add(c);
+            }
+        }
+        public void CloseDialog()
+        {
+            dialogObj.SetActive(false);
+            foreach (var c in choices)
+            {
+                Destroy(c.gameObject);
+            }
+            choices.Clear();
         }
         #endregion
     }
