@@ -72,6 +72,7 @@ namespace Ice
         public static void SaveData()
         {
             Save.Binary.SaveToFile(Data, SavePath);
+            UIMgr.ShowNotification("Progress Saved.");
         }
         public static void LoadData()
         {
@@ -92,7 +93,9 @@ namespace Ice
         [IcePacket]
         public sealed class PlayerData
         {
+            public int id = 1021;
             public int coin;    // 打敌人获取，用于各种增幅
+            public int coinAll; // 目前所有的金币
             public float hpBonus;
             public int mainWeaponMagBonus;
             public bool foundFlashLight;

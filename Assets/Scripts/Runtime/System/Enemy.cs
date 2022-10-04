@@ -12,6 +12,7 @@ namespace IceEngine
         public Collider aimBox;
         public float chaseDistance;
         public int type;
+        public int coin = 1;
         public override Handable CurrentInHand => weapon;
 
         [System.NonSerialized] public NavMeshAgent nav;
@@ -72,6 +73,7 @@ namespace IceEngine
             hitBox.enabled = false;
             aimBox.enabled = false;
             weapon.gameObject.SetActive(false);
+            Ice.Gameplay.CurLevel.AddCoin(coin);
         }
 
         protected override void OnMorning()

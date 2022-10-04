@@ -9,5 +9,7 @@ namespace IceEngine.Internal
         public GameObject uiCanvasManagerPrefab;
         public GameObject playerPrefab;
         public GameObject cameraMgrPrefab;
+
+        public string coinMark = "✪";
     }
 }

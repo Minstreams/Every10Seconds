@@ -8,11 +8,14 @@ namespace IceEngine
     public class UICanvasManager : MonoBehaviour
     {
         Player Player => Ice.Gameplay.Player;
+        IceEngine.Internal.SettingGameplay Setting => Ice.Gameplay.Setting;
+        Ice.Gameplay.PlayerData Data => Ice.Gameplay.Data;
 
         void Awake()
         {
             DontDestroyOnLoad(gameObject);
             Awake_Battle();
+            OpenShelterUI();
         }
 
         #region Notification
@@ -97,19 +100,16 @@ namespace IceEngine
         public void SetBattleUI(bool on)
         {
             battleUIRoot.SetActive(on);
+            if (rBattleUpdate != null)
+            {
+                StopCoroutine(rBattleUpdate);
+                rBattleUpdate = null;
+            }
             if (on)
             {
                 hintText.text = "";
                 hpBarRect.sizeDelta = new Vector2(Player.maxHp / 100 * 128, 32);
                 rBattleUpdate = StartCoroutine(RunBattleUpdate());
-            }
-            else
-            {
-                if (rBattleUpdate != null)
-                {
-                    StopCoroutine(rBattleUpdate);
-                    rBattleUpdate = null;
-                }
             }
         }
         Coroutine rBattleUpdate;
@@ -218,6 +218,116 @@ namespace IceEngine
             }
             // EyeClosed, Restart
             UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
+        #endregion
+
+        #region Shelter
+        [Header("Shelter")]
+        public GameObject shelterUIObj;
+        public GameObject lootUIObj;
+        public Text coinText;
+        public Text lootCoinText;
+        public AudioSource coinJumpSound;
+        public float coinJumpRate = 0.05f;
+        public Color jumpColor = Color.white;
+
+        public string GetCoinText(int coin, string mark) => coin == 0 ? "" : $"{coin} {mark}";
+
+
+
+        public void OpenShelterUI()
+        {
+            lootUIObj.SetActive(false);
+            if (rLootUpdate != null)
+            {
+                StopCoroutine(rLootUpdate);
+                rLootUpdate = null;
+            }
+
+            shelterUIObj.SetActive(true);
+            UpdateCoin();
+
+            if (rShelterUpdate != null)
+            {
+                StopCoroutine(rShelterUpdate);
+                rShelterUpdate = null;
+            }
+            rShelterUpdate = StartCoroutine(RunShelterUpdate());
+        }
+        public void CloseShelterUI()
+        {
+            shelterUIObj.SetActive(false);
+            if (rShelterUpdate != null)
+            {
+                StopCoroutine(rShelterUpdate);
+                rShelterUpdate = null;
+            }
+
+            lootUIObj.SetActive(true);
+            if (rLootUpdate != null)
+            {
+                StopCoroutine(rLootUpdate);
+                rLootUpdate = null;
+            }
+            rLootUpdate = StartCoroutine(RunLootUpdate());
+        }
+        public void UpdateCoin()
+        {
+            coinTarget = Data.coin;
+        }
+
+        public void UpdateLootCoin()
+        {
+            lootCoinTarget = Ice.Gameplay.CurLevel.coin;
+        }
+
+        float coinTarget = 0;
+        float coin = 0;
+        int lastCoin = 0;
+
+        Coroutine rShelterUpdate;
+        IEnumerator RunShelterUpdate()
+        {
+            while (true)
+            {
+                coin += (coinTarget - coin) * coinJumpRate;
+                coinText.color = Color.Lerp(coinText.color, new Color(0.8f, 0.8f, 0.8f), coinJumpRate);
+                var c = Mathf.CeilToInt(coin);
+                if (c != lastCoin)
+                {
+                    // Jump
+                    coinJumpSound.Play();
+                    lastCoin = c;
+                    coinText.text = GetCoinText(c, Setting.coinMark);
+                    coinText.color = jumpColor;
+                }
+                yield return 0;
+            }
+        }
+
+
+        float lootCoinTarget = 0;
+        float lootCoin = 0;
+        int lastLootCoin = 0;
+
+        Coroutine rLootUpdate;
+        IEnumerator RunLootUpdate()
+        {
+            while (true)
+            {
+                lootCoin += (lootCoinTarget - lootCoin) * coinJumpRate;
+                lootCoinText.color = Color.Lerp(lootCoinText.color, new Color(0.8f, 0.8f, 0.8f), coinJumpRate);
+                var c = Mathf.CeilToInt(lootCoin);
+                if (c != lastLootCoin)
+                {
+                    // Jump
+                    coinJumpSound.Play();
+                    lastLootCoin = c;
+                    lootCoinText.text = GetCoinText(c, Setting.coinMark);
+                    lootCoinText.color = jumpColor;
+                }
+                yield return 0;
+            }
         }
         #endregion
     }

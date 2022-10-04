@@ -353,11 +353,11 @@ Material:
     - _Smoothness: 1
     - _ThresRange: 0.1
     m_Colors:
-    - _EmissionColor: {r: 0.32719696, g: 1.2896663, b: 2.2521355, a: 1}
+    - _EmissionColor: {r: 1.1509695, g: 1.2846304, b: 1.4182914, a: 1}
     - _EmissionColor2: {r: 7.999999, g: 7.999999, b: 7.999999, a: 1}
     - _EmissionTarget: {r: 0.5058824, g: 0.78039217, b: 0.83137256, a: 1}
     - _EmissionTarget2: {r: 0.9333334, g: 0.9333334, b: 0.9333334, a: 1}
-    - _MetallicColor: {r: 0, g: 0, b: 0, a: 0}
+    - _MetallicColor: {r: 0.64705884, g: 0.87058824, b: 0.89411765, a: 1}
     - _Tint: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!28 &6702697693883957315

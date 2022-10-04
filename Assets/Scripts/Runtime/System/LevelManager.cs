@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -83,6 +84,15 @@ namespace IceEngine
             else e = GameObject.Instantiate(prefab, position, rotation).GetComponent<Enemy>();
             pool.Enqueue(e);
             return e;
+        }
+        #endregion
+
+        #region Loot
+        [NonSerialized] public int coin = 0;
+        public void AddCoin(int c)
+        {
+            coin += c;
+            UIMgr.UpdateLootCoin();
         }
         #endregion
     }

@@ -14,14 +14,17 @@ namespace IceEngine
         void OnDrawGizmos()
         {
             var box = GetComponent<BoxCollider>();
-            Gizmos.color = Color.cyan;
+            Gizmos.color = isShelter ? Color.cyan : Color.red;
             Gizmos.DrawWireCube(transform.position + box.center, box.size);
             Gizmos.color = Color.white;
         }
 #endif
+
+        public bool isShelter;
         protected override void OnPlayerEnter()
         {
-            //Ice.Gameplay.Escape();
+            if (isShelter) Ice.Gameplay.UIMgr.OpenShelterUI();
+            else Ice.Gameplay.UIMgr.CloseShelterUI();
         }
     }
 }
