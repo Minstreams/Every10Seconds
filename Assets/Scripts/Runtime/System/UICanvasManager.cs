@@ -179,5 +179,46 @@ namespace IceEngine
             choices.Clear();
         }
         #endregion
+
+        #region Black
+        public Image black;
+        public AnimationCurve openEyeCurve;
+        public float openEyeTime;
+        public AnimationCurve closeEyeCurve;
+        public float closeEyeTime;
+
+        [Button]
+        public void OpenEye()
+        {
+            StartCoroutine(RunOpenEye());
+        }
+        IEnumerator RunOpenEye()
+        {
+            float t = 0;
+            while (t < 1)
+            {
+                black.color = new Color(0, 0, 0, openEyeCurve.Evaluate(t));
+                yield return 0;
+                t += Time.deltaTime / openEyeTime;
+            }
+        }
+        [Button]
+        public void CloseEye()
+        {
+            StartCoroutine(RunCloseEye());
+        }
+        IEnumerator RunCloseEye()
+        {
+            float t = 0;
+            while (t < 1)
+            {
+                black.color = new Color(0, 0, 0, closeEyeCurve.Evaluate(t));
+                yield return 0;
+                t += Time.deltaTime / closeEyeTime;
+            }
+            // EyeClosed, Restart
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
+        #endregion
     }
 }

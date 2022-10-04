@@ -1471,7 +1471,7 @@ MonoBehaviour:
   posWeaponBasic: {fileID: 4938905180366354862}
   posWeaponMain: {fileID: 5615606604031169234}
   posGrenade: {fileID: 0}
-  posItem: {fileID: 0}
+  posItem: {fileID: 7560671051900591398}
   aimMask:
     serializedVersion: 2
     m_Bits: 11329
@@ -1696,6 +1696,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4717796688540132}
+  - {fileID: 7560671051900591398}
   m_Father: {fileID: 4218713496361002}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2318,6 +2319,37 @@ Transform:
   m_Father: {fileID: 4576152570930330}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -127.693, y: 167.269, z: -2.2789917}
+--- !u!1 &4892736693171203755
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7560671051900591398}
+  m_Layer: 9
+  m_Name: PosItem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7560671051900591398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4892736693171203755}
+  m_LocalRotation: {x: 0.59797066, y: -0.3537035, z: 0.58288527, w: -0.42139018}
+  m_LocalPosition: {x: -0.19854331, y: 0.21471697, z: -0.06920123}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4396597906533452}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -181.999, y: 188.089, z: 160.08499}
 --- !u!1 &5682026394971583400
 GameObject:
   m_ObjectHideFlags: 0

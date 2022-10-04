@@ -134,7 +134,7 @@ namespace IceEngine
                 hitParts.Emit(UnityEngine.Random.Range(1, 4));
                 hitSound.Play();
 
-                if (hit.collider.CompareTag("Enemy"))
+                if (hit.collider.gameObject.layer == 10 /*Enemy*/)
                 {
                     if (hit.rigidbody != null)
                     {

@@ -12,6 +12,7 @@ namespace IceEngine
     public class LevelManager : MonoBehaviour
     {
         public Player Player => Ice.Gameplay.Player;
+        public UICanvasManager UIMgr => Ice.Gameplay.UIMgr;
 
         public Light sun;
         public AnimationCurve intensityCurve;
@@ -23,6 +24,7 @@ namespace IceEngine
         void Start()
         {
             // 初始化战斗UI
+            UIMgr.OpenEye();
             UIMgr.SetBattleUI(true);
 
             // 玩家生成
@@ -62,5 +64,23 @@ namespace IceEngine
                 CurTime -= 20;
             }
         }
+
+        #region EnemyPool
+        public int enemyPoolCapacity;
+        Dictionary<GameObject, Queue<Enemy>> enemyPoolMap = new();
+        public Enemy GetEnemyAt(GameObject prefab, Vector3 position, Quaternion rotation)
+        {
+            // Get Pool
+            if (!enemyPoolMap.TryGetValue(prefab, out var pool))
+            {
+                enemyPoolMap.Add(prefab, pool = new Queue<Enemy>());
+            }
+            Enemy e;
+            if (pool.Count >= enemyPoolCapacity) e = pool.Dequeue();
+            else e = GameObject.Instantiate(prefab, position, rotation).GetComponent<Enemy>();
+            pool.Enqueue(e);
+            return e;
+        }
+        #endregion
     }
 }

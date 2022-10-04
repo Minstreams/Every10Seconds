@@ -74,6 +74,7 @@ namespace IceEngine
                 {
                     currentInHand.transform.SetParent(posItem, false);
                 }
+                currentInHand.transform.localRotation = Quaternion.identity;
 
                 currentInHand.OnSwitchOff();
             }
@@ -113,6 +114,16 @@ namespace IceEngine
                 weaponMain = weapon;
                 SwitchToWeaponMain();
             }
+        }
+        public void PickItem(PickableItem p)
+        {
+            var it = GameObject.Instantiate(p.prefab).GetComponent<Item>();
+            it.owner = this;
+            it.OnPick(p);
+
+            DropItem();
+            item = it;
+            SwitchToItem();
         }
         // Main
         public void SwitchToWeaponMain()
@@ -215,6 +226,12 @@ namespace IceEngine
         public void ReleaseShoot()
         {
             CurrentInHand.OnEndUse();
+        }
+
+        public override void Die(Vector3 push)
+        {
+            base.Die(push);
+            Ice.Gameplay.UIMgr.CloseEye();
         }
     }
 }

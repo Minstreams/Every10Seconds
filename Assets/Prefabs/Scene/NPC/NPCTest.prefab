@@ -1069,7 +1069,7 @@ Animator:
   m_GameObject: {fileID: 4422445824568881128}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: fc44d272a26dd734fbef67802bbe6a41, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c3d2a0307728cbf41996109c18295a49, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1131,6 +1131,7 @@ MonoBehaviour:
         action:
           m_PersistentCalls:
             m_Calls: []
+  animTrigger: 
 --- !u!1 &4422445824568881130
 GameObject:
   m_ObjectHideFlags: 0

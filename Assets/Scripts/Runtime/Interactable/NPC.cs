@@ -10,6 +10,16 @@ namespace IceEngine
     {
         public string npcName;
         public List<Dialog> dialogs = new();
+        public string animTrigger = null;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            if (!animTrigger.IsNullOrEmpty())
+            {
+                GetComponent<Animator>().SetTrigger(animTrigger);
+            }
+        }
         public Dialog GetDialog()
         {
             for (int i = dialogs.Count - 1; i >= 0; i--)

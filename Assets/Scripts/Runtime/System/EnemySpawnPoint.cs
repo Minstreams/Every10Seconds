@@ -36,7 +36,7 @@ namespace IceEngine
                     {
                         var offset = Random.insideUnitCircle * radius;
                         var pos = transform.position + new Vector3(offset.x, 0, offset.y);
-                        var e = GameObject.Instantiate(enemyList[Random.Range(0, enemyList.Count)], pos, transform.rotation).GetComponent<Enemy>();
+                        var e = Ice.Gameplay.CurLevel.GetEnemyAt(enemyList[Random.Range(0, enemyList.Count)], pos, transform.rotation);
                         e.maxHp = health;
                         e.nav.speed = speed;
                         e.SpawnAt(pos);
