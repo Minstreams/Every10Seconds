@@ -21,11 +21,21 @@ namespace IceEngine
         {
             base.SpawnAt(pos);
             hp = maxHp;
+            cha.enabled = true;
         }
         public override void Harm(float harm, Vector3 push)
         {
             base.Harm(harm, push);
             cha.Move(push);
+        }
+        public override void Die(Vector3 push)
+        {
+            base.Die(push);
+            Ice.Gameplay.CurLevel.Die();
+            DropItem();
+            DropWeaponBasic();
+            DropWeaponMain();
+            cha.enabled = false;
         }
         #endregion
 
@@ -85,15 +95,18 @@ namespace IceEngine
             }
             currentInHand = h;
         }
-        public void Drop(Handable h)
+        public void Drop(Handable h, bool generatePickable = true)
         {
             if (h == null) return;
-            Vector3 dropPos = posHand.position;
-            if (Physics.Raycast(dropPos, Vector3.down, out RaycastHit hit, 100, 1 << LayerMask.NameToLayer("Ground")))
+            if (generatePickable)
             {
-                dropPos = hit.point;
+                Vector3 dropPos = posHand.position;
+                if (Physics.Raycast(dropPos, Vector3.down, out RaycastHit hit, 100, 1 << LayerMask.NameToLayer("Ground")))
+                {
+                    dropPos = hit.point;
+                }
+                GameObject.Instantiate(h.pickablePrefab, dropPos, Quaternion.identity);
             }
-            GameObject.Instantiate(h.pickablePrefab, dropPos, Quaternion.identity);
             Destroy(h.gameObject);
         }
 
@@ -131,9 +144,10 @@ namespace IceEngine
             SwitchTo(weaponMain);
             Ice.Gameplay.UIMgr.OnSwitchSlot(1);
         }
-        public void DropWeaponMain()
+        public void DropWeaponMain(bool generatePickable = true)
         {
-            Drop(weaponMain);
+            if (currentInHand == weaponMain) currentInHand = handEmpty;
+            Drop(weaponMain, generatePickable);
             weaponMain = null;
         }
         // Basic
@@ -142,9 +156,10 @@ namespace IceEngine
             SwitchTo(weaponBasic);
             Ice.Gameplay.UIMgr.OnSwitchSlot(2);
         }
-        public void DropWeaponBasic()
+        public void DropWeaponBasic(bool generatePickable = true)
         {
-            Drop(weaponBasic);
+            if (currentInHand == weaponBasic) currentInHand = handEmpty;
+            Drop(weaponBasic, generatePickable);
             weaponBasic = null;
         }
         // Item
@@ -153,22 +168,25 @@ namespace IceEngine
             SwitchTo(item);
             Ice.Gameplay.UIMgr.OnSwitchSlot(3);
         }
-        public void DropItem()
+        public void DropItem(bool generatePickable = true)
         {
-            Drop(item);
+            if (currentInHand == item) currentInHand = handEmpty;
+            Drop(item, generatePickable);
             item = null;
         }
         #endregion
 
         void Update()
         {
+            if (isDead) return;
             Shader.SetGlobalVector("_PlayerPosition", transform.position);
 
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Debug.DrawRay(ray.origin, ray.direction * 100);
-            if (Physics.Raycast(ray, out var raycastHit, 100, aimMask))
+            int mask = CurrentInHand.aimEnemy ? aimMask : (aimMask ^ (1 << 11));
+            if (Physics.Raycast(ray, out var raycastHit, 100, mask))
             {
-                if (raycastHit.collider.CompareTag("Enemy"))
+                if (CurrentInHand.aimEnemy && raycastHit.collider.CompareTag("Enemy"))
                 {
                     aimTarget = raycastHit.collider.bounds.center;
                 }
@@ -226,12 +244,6 @@ namespace IceEngine
         public void ReleaseShoot()
         {
             CurrentInHand.OnEndUse();
-        }
-
-        public override void Die(Vector3 push)
-        {
-            base.Die(push);
-            Ice.Gameplay.CurLevel.Die();
         }
     }
 }

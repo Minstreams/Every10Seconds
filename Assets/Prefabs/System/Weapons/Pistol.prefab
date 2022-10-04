@@ -55,6 +55,7 @@ MonoBehaviour:
   ikRightHand: 1
   pickablePrefab: {fileID: 6864546619036114640, guid: 7b44c09b5cbdfeb48b1348860af55e3a,
     type: 3}
+  aimEnemy: 1
   weaponType: 0
   shotSound: {fileID: 7262206198333867919}
   shotParts: {fileID: 5243659406950227815}
@@ -79,6 +80,7 @@ MonoBehaviour:
   maxMag: 30
   infiniteAmmo: 1
   accurate: 0.1
+  goThroughEnemies: 0
   slotPrefab: {fileID: 1271916850363780950, guid: 471f3a0872f311d42a4d46531c373012,
     type: 3}
   aimMark: {fileID: 7503485924428018046}
@@ -87,6 +89,7 @@ MonoBehaviour:
   emptySound: {fileID: 1525724610430716041}
   reloadTime: 0.8
   reloadEndTime: 0.2
+  ammoCountInOnShoot: 1
 --- !u!1 &1843150255421752
 GameObject:
   m_ObjectHideFlags: 0

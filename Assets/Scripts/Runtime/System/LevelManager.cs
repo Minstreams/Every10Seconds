@@ -118,6 +118,17 @@ namespace IceEngine
         #endregion
 
         string sleepText = "";
+        public void OnDroneEnterShelter()
+        {
+            // 结算
+            UIMgr.ShowNotification($"You drone has brought your {coin} {Setting.coinMark} " +
+                $"to basement");
+            Data.coin += coin;
+            Data.coinAll += coin;
+            coin = 0;
+
+            UIMgr.UpdateLootCoin();
+        }
         public void EnterShelter()
         {
             // 结算

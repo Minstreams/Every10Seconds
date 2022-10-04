@@ -53,7 +53,7 @@ namespace IceEngine
         }
 
         [Button]
-        public void Play()
+        public void Play(Action callback = null)
         {
             if (!autoMode)
             {
@@ -62,6 +62,7 @@ namespace IceEngine
                 transform.rotation = pt.rotation;
             }
             position = transform.position;
+            if (callback != null) onPlayed += callback;
 
             StopAllCoroutines();
             StartCoroutine(RunPlay());
