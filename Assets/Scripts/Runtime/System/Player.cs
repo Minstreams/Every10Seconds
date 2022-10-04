@@ -26,10 +26,12 @@ namespace IceEngine
         public override void Harm(float harm, Vector3 push)
         {
             base.Harm(harm, push);
+            if (isDead) return;
             cha.Move(push);
         }
         public override void Die(Vector3 push)
         {
+            if (isDead) return;
             base.Die(push);
             Ice.Gameplay.CurLevel.Die();
             DropItem();
