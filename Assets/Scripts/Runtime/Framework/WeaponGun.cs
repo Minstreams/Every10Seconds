@@ -81,6 +81,16 @@ namespace IceEngine
             slot.SetAmmo(ammo);
             slot.SetMag(mag);
         }
+        public override void OnDrop()
+        {
+            var uiSlot = weaponType switch
+            {
+                WeaponSlotType.Basic => Ice.Gameplay.UIMgr.slotBasic,
+                WeaponSlotType.Main => Ice.Gameplay.UIMgr.slotMain,
+                _ => Ice.Gameplay.UIMgr.slotBasic,
+            };
+            uiSlot.Unload();
+        }
 
         public override void OnSwitchOn()
         {

@@ -17,11 +17,13 @@ namespace IceEngine
         public override void OnPick(Pickable p)
         {
             //var pi = p as PickableItem;
-
             slot = Ice.Gameplay.UIMgr.slotItem.Load(slotPrefab).GetComponent<SlotItem>();
             slot.SetIcon(icon);
         }
-
+        public override void OnDrop()
+        {
+            Ice.Gameplay.UIMgr.slotItem.Unload();
+        }
         public override void OnUpdate()
         {
             transform.LookAt(AimPos);

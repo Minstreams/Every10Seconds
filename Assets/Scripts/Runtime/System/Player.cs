@@ -109,6 +109,7 @@ namespace IceEngine
                 }
                 GameObject.Instantiate(h.pickablePrefab, dropPos, Quaternion.identity);
             }
+            h.OnDrop();
             Destroy(h.gameObject);
         }
 

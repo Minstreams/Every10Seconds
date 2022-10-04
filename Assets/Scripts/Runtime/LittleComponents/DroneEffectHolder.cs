@@ -25,9 +25,13 @@ namespace IceEngine
 
         Vector3 position;
 
-        private void Start()
+        void Start()
         {
             if (autoMode) Play();
+        }
+        void OnDestroy()
+        {
+            if (playRoutine != null) onPlayed?.Invoke();
         }
         void ApplyEffect(float t)
         {
@@ -58,16 +62,17 @@ namespace IceEngine
             if (!autoMode)
             {
                 var pt = Ice.Gameplay.Player.transform;
-                transform.position = pt.position + pt.forward;
+                transform.position = pt.position + pt.forward + Vector3.up;
                 transform.rotation = pt.rotation;
             }
             position = transform.position;
             if (callback != null) onPlayed += callback;
 
             StopAllCoroutines();
-            StartCoroutine(RunPlay());
+            playRoutine = StartCoroutine(RunPlay());
         }
 
+        Coroutine playRoutine;
         IEnumerator RunPlay()
         {
             float t = 0;
@@ -80,6 +85,7 @@ namespace IceEngine
             ApplyEffect(time);
             if (autoMode) StartCoroutine(RunPlay());
             else onPlayed?.Invoke();
+            playRoutine = null;
         }
 
     }

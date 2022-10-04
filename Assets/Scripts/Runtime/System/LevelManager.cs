@@ -121,8 +121,6 @@ namespace IceEngine
         public void OnDroneEnterShelter()
         {
             // 结算
-            UIMgr.ShowNotification($"You drone has brought your {coin} {Setting.coinMark} " +
-                $"to basement");
             Data.coin += coin;
             Data.coinAll += coin;
             coin = 0;
