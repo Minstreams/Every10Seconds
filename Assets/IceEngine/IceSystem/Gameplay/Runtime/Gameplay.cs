@@ -39,13 +39,10 @@ namespace Ice
         }
         #endregion
 
-        #region Player
         public static Player Player => GetGlobalComponent(ref _player, Setting.playerPrefab); static Player _player;
-        #endregion
-
-        #region UI
+        public static CameraMgr CamMgr => GetGlobalComponent(ref _camMgr, Setting.cameraMgrPrefab); static CameraMgr _camMgr;
         public static UICanvasManager UIMgr => GetGlobalComponent(ref _uiMgr, Setting.uiCanvasManagerPrefab); static UICanvasManager _uiMgr;
-        #endregion
+
 
         #region Dialog
         public static string currentNPC = null;

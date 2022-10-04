@@ -16,8 +16,8 @@ namespace IceEngine
             var cur = Ice.Gameplay.Player.CurrentInHand;
             if (cur is WeaponGun gun && (gun.ammo != gun.maxAmmo || gun.mag != gun.maxMag))
             {
-                gun.ammo = gun.maxAmmo;
-                gun.mag = gun.maxMag;
+                gun.slot.SetAmmo(gun.ammo = gun.maxAmmo);
+                gun.slot.SetMag(gun.mag = gun.maxMag);
                 onPickSound.Play();
             }
             else

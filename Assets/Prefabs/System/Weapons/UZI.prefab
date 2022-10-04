@@ -76,7 +76,7 @@ MonoBehaviour:
     m_Bits: 13377
   maxMag: 120
   infiniteAmmo: 0
-  slotPrefab: {fileID: 1271916850363780950, guid: 471f3a0872f311d42a4d46531c373012,
+  slotPrefab: {fileID: 1271916850363780950, guid: 0eafc70616e2a474cad9068bd3b8513d,
     type: 3}
   aimMark: {fileID: 6801797203034747907}
   reloadSound: {fileID: 5481136842303502669}

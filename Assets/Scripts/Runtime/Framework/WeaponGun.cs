@@ -130,6 +130,7 @@ namespace IceEngine
 
             // 效果
             PlayShotEffectAt(hitPoint);
+            Ice.Gameplay.CamMgr.AddPulse(ammoDir * forceBackward);
 
             return true;
         }
@@ -188,7 +189,7 @@ namespace IceEngine
             {
                 var ammoOffset = Mathf.Min(mag, maxAmmo - ammo);
                 slot.SetAmmo(ammo += ammoOffset);
-                mag -= ammoOffset;
+                slot.SetMag(mag -= ammoOffset);
             }
         }
     }

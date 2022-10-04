@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4383716914042983195}
   - component: {fileID: -8732605290006242512}
+  - component: {fileID: 5750454085994421293}
   m_Layer: 6
   m_Name: Base03
   m_TagString: Untagged
@@ -46,6 +47,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: -0.5, z: 0}
+--- !u!114 &5750454085994421293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5872670435384348341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75a765d655b227544938f504dd2685df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+  brick: {fileID: 0}
 --- !u!1 &6581893264640424783
 GameObject:
   m_ObjectHideFlags: 0

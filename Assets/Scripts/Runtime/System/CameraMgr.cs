@@ -14,8 +14,9 @@ namespace IceEngine
         public float moveRate = 0.1f;
         public float camDis = 2;
         public static float targetOrthographicSize = 2;
+        public float pulseRate = 1;
 
-
+        Vector3 targetPos;
         void Update()
         {
             var offset = Ice.Gameplay.Player.focusPoint.position - transform.position;
@@ -24,7 +25,13 @@ namespace IceEngine
             var size = Mathf.Lerp(cam.orthographicSize, targetOrthographicSize, t);
             cam.orthographicSize = size;
             size *= camDis;
-            cam.transform.localPosition = new Vector3(size, size * 1.41421f, -size);
+            targetPos = new Vector3(size, size * 1.41421f, -size);
+            cam.transform.localPosition += (targetPos - cam.transform.localPosition) * t;
+        }
+
+        public void AddPulse(Vector3 push)
+        {
+            cam.transform.Translate(push * pulseRate, Space.World);
         }
 
         [Button]

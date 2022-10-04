@@ -19,3 +19,5 @@ MonoBehaviour:
     type: 3}
   playerPrefab: {fileID: 1612063079028484, guid: 709ba3528fb15884da114795daf191a4,
     type: 3}
+  cameraMgrPrefab: {fileID: 9212147975242710515, guid: 71b556b82e0875346aa4070d5c6f7cb7,
+    type: 3}
