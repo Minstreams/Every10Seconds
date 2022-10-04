@@ -86,7 +86,7 @@ MonoBehaviour:
   reloadTime: 1
   reloadEndTime: 0.2
   shootRate: 10
-  instantShoot: 0
+  instantShoot: 1
 --- !u!1 &3101418172765374141
 GameObject:
   m_ObjectHideFlags: 0

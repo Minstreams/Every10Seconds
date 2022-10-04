@@ -19,6 +19,7 @@ namespace IceEngine
         public LineRenderer lineRenderer;
         public Color lineColor;
         public float lineLifeTime = 0.2f;
+        public virtual int LineCount => 1;
 
         public Transform gunPoint;
 
@@ -35,6 +36,7 @@ namespace IceEngine
         public int maxMag = 30;
         public bool infiniteAmmo;
         public float accurate = 0;
+        public bool goThroughEnemies;
 
         [Header("UI")]
         public GameObject slotPrefab;
@@ -50,7 +52,19 @@ namespace IceEngine
         [NonSerialized] public int ammo;
         [NonSerialized] public int mag;
         [NonSerialized] public SlotGun slot;
+        [NonSerialized] public List<LineRenderer> lineList = new();
+        [NonSerialized] public List<Coroutine> lineCorList = new();
 
+        void Awake()
+        {
+            lineList.Add(lineRenderer);
+            lineCorList.Add(null);
+            for (int i = 1; i < LineCount; ++i)
+            {
+                lineList.Add(GameObject.Instantiate(lineRenderer, transform));
+                lineCorList.Add(null);
+            }
+        }
         public override void OnPick(Pickable p)
         {
             var pb = p as PickableGun;
@@ -108,11 +122,18 @@ namespace IceEngine
 
             slot.SetAmmo(--ammo);
 
-            Vector3 ammoDir = ((AimPos - gunPoint.position).normalized + UnityEngine.Random.insideUnitSphere * accurate).normalized;
+            var rDisc = UnityEngine.Random.insideUnitCircle * accurate;
+            Vector3 ammoDir = ((AimPos - gunPoint.position).normalized + new Vector3(rDisc.x, 0, rDisc.y)).normalized;
             Vector3 hitPoint = gunPoint.position + ammoDir * maxDis;
-            if (Physics.Raycast(gunPoint.position, ammoDir, out var hit, maxDis, shotLayerMask))
+            bool OnHit(RaycastHit hit)
             {
                 hitPoint = hit.point;
+                // Hit Effects
+                hitParts.transform.position = hitPoint;
+                hitParts.transform.rotation = Quaternion.LookRotation(hit.normal);
+                hitParts.Emit(UnityEngine.Random.Range(1, 4));
+                hitSound.Play();
+
                 if (hit.collider.CompareTag("Enemy"))
                 {
                     if (hit.rigidbody != null)
@@ -121,14 +142,20 @@ namespace IceEngine
                     }
                     var e = hit.collider.GetComponentInParent<Enemy>();
                     e.Harm(harm, ammoDir * push);
+                    return true;
                 }
-
-                // Hit Effects
-                hitParts.transform.position = hitPoint;
-                hitParts.transform.rotation = Quaternion.LookRotation(hit.normal);
-                hitParts.Emit(UnityEngine.Random.Range(2, 5));
-                hitSound.Play();
+                return false;
             }
+            if (goThroughEnemies)
+            {
+                var hits = Physics.RaycastAll(gunPoint.position, ammoDir, maxDis, shotLayerMask);
+                foreach (var hit in hits) if (!OnHit(hit)) break;
+            }
+            else
+            {
+                if (Physics.Raycast(gunPoint.position, ammoDir, out var hit, maxDis, shotLayerMask)) OnHit(hit);
+            }
+
 
             // 效果
             PlayShotEffectAt(hitPoint);
@@ -136,23 +163,25 @@ namespace IceEngine
 
             return true;
         }
+        int lineId = 0;
         public void PlayShotEffectAt(Vector3 hitPoint)
         {
             ammoParts.Emit(1);
             model.Translate(Vector3.back * forceBackward, Space.Self);
             shotParts.Emit(UnityEngine.Random.Range(shotPartsEmitRange.x, shotPartsEmitRange.y));
             shotSound.Play();
-            lineRenderer.SetPosition(0, gunPoint.position);
-            lineRenderer.SetPosition(1, hitPoint);
+            if (++lineId >= LineCount) lineId = 0;
+            var lineCoroutine = lineCorList[lineId];
             if (lineCoroutine != null)
             {
                 StopCoroutine(lineCoroutine);
             }
-            lineCoroutine = StartCoroutine(lineFade());
+            lineCorList[lineId] = StartCoroutine(lineFade(lineList[lineId], hitPoint));
         }
-        Coroutine lineCoroutine;
-        IEnumerator lineFade()
+        IEnumerator lineFade(LineRenderer lineRenderer, Vector3 hitPoint)
         {
+            lineRenderer.SetPosition(0, gunPoint.position);
+            lineRenderer.SetPosition(1, hitPoint);
             Color c = lineColor;
 
             while (c.a > 0)

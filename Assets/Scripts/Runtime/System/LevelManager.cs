@@ -36,29 +36,30 @@ namespace IceEngine
         IEnumerator RunInLevel()
         {
             // Day
-            float t = 0;
+            CurTime = 0;
             while (true)
             {
                 onMorning?.Invoke();
                 isMorning = true;
-                while (t < 1)
+                while (CurTime < 10)
                 {
-                    t += Time.deltaTime * 0.1f;
+                    CurTime += Time.deltaTime;
+                    var t = CurTime * 0.1f;
                     sun.transform.rotation = Quaternion.Euler(t * 180, 0, 0);
                     sun.intensity = intensityCurve.Evaluate(t);
                     yield return 0;
                 }
-                t -= 1;
 
                 onEvening?.Invoke();
                 isMorning = false;
-                while (t < 1)
+                while (CurTime < 20)
                 {
-                    t += Time.deltaTime * 0.1f;
-                    sun.transform.rotation = Quaternion.Euler(180 + t * 180, 0, 0);
+                    CurTime += Time.deltaTime;
+                    var t = CurTime * 0.1f;
+                    sun.transform.rotation = Quaternion.Euler(t * 180, 0, 0);
                     yield return 0;
                 }
-                t -= 1;
+                CurTime -= 20;
             }
         }
     }

@@ -10,6 +10,7 @@ namespace Ice
     public sealed class Gameplay : IceEngine.Framework.IceSystem<IceEngine.Internal.SettingGameplay>
     {
         public static LevelManager CurLevel { get; set; }
+        public static float CurTime { get; set; }
 
         #region Events
         public static bool isMorning;

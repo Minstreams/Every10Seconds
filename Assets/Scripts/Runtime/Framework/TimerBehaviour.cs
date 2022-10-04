@@ -23,6 +23,7 @@ namespace IceEngine
             Ice.Gameplay.onEvening -= OnEvening;
         }
         protected bool IsMorning => Ice.Gameplay.isMorning;
+        protected float CurTime => Ice.Gameplay.CurTime;
         protected virtual void OnMorning() { }
         protected virtual void OnEvening() { }
     }

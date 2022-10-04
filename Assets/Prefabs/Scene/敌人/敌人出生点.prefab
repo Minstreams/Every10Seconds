@@ -44,9 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf7b69cfdc53c9b4e9aae8dc90e6a1c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 5660869396319601467, guid: e97e9cc9384e0ab468b6277f75e59bad, type: 3}
+  enemyList:
+  - {fileID: 5660869396319601467, guid: e97e9cc9384e0ab468b6277f75e59bad, type: 3}
+  - {fileID: 3767370076977414084, guid: 02bfff4668cfc254583610beb959eb53, type: 3}
   interval: 1
   speed: 2
-  health: 40
-  typeRage: {x: 0, y: 1}
-  range: 6
+  health: 20
+  radius: 2
+  range: {x: 6, y: 16}
+  timeRange: {x: 0, y: 5}

@@ -11,48 +11,62 @@ namespace IceEngine
     [ExecuteInEditMode]
     public class EnemySpawnPoint : TimerBehaviour
     {
-        public GameObject enemy;
+        public List<GameObject> enemyList = new();
         [Label("间隔时间")] public float interval = 10;
         [Label("速度")] public float speed = 1;
         [Label("生命值")] public float health = 3;
-        public Vector2 typeRage = Vector2.up;
-        [Label("生成范围半径")] public float range;
-        protected override void OnMorning()
+        [Label("生成范围半径")] public float radius;
+        public Vector2 range;
+        public Vector2 timeRange;
+
+
+        float t;
+
+        void Update()
         {
-            StopAllCoroutines();
-        }
-        protected override void OnEvening()
-        {
-            StartCoroutine(RunMain());
-        }
-        IEnumerator RunMain()
-        {
-            while (true)
+#if UNITY_EDITOR
+            if (!EditorApplication.isPlaying) return;
+#endif
+            if (t <= 0)
             {
-                var offset = Random.insideUnitCircle * Random.value * range;
-                var pos = transform.position + new Vector3(offset.x, 0, offset.y);
-                var e = GameObject.Instantiate(enemy, pos, transform.rotation).GetComponent<Enemy>();
-                e.maxHp = health;
-                e.nav.speed = speed;
-                e.SpawnAt(pos);
-                e.anim.SetFloat("type", Random.Range(typeRage.x, typeRage.y));
-                yield return new WaitForSeconds(interval);
+                if (CurTime >= timeRange.x && CurTime <= timeRange.y)
+                {
+                    var dis = Vector3.Distance(transform.position, Ice.Gameplay.Player.transform.position);
+                    if (dis >= range.x && dis <= range.y)
+                    {
+                        var offset = Random.insideUnitCircle * radius;
+                        var pos = transform.position + new Vector3(offset.x, 0, offset.y);
+                        var e = GameObject.Instantiate(enemyList[Random.Range(0, enemyList.Count)], pos, transform.rotation).GetComponent<Enemy>();
+                        e.maxHp = health;
+                        e.nav.speed = speed;
+                        e.SpawnAt(pos);
+                        t += interval;
+                    }
+                }
+            }
+            else
+            {
+                t -= Time.deltaTime;
             }
         }
-
         void OnDrawGizmos()
         {
-            Gizmos.color = new Color(1, 0.6f, 0, 0.8f);
-            var c = transform.position;
-            for (float i = 0; i < Mathf.PI * 2; i += Mathf.PI / 16)
+            void DrawDisc(float radius, Color color)
             {
-                float i2 = i + Mathf.PI / 16;
-                var p1 = c + new Vector3(Mathf.Sin(i) * range, 0, Mathf.Cos(i) * range);
-                var p2 = c + new Vector3(Mathf.Sin(i2) * range, 0, Mathf.Cos(i2) * range);
-                Gizmos.DrawLine(p1, p2);
+                Gizmos.color = color;
+                var c = transform.position;
+                for (float i = 0; i < Mathf.PI * 2; i += Mathf.PI / 16)
+                {
+                    float i2 = i + Mathf.PI / 16;
+                    var p1 = c + new Vector3(Mathf.Sin(i) * radius, 0, Mathf.Cos(i) * radius);
+                    var p2 = c + new Vector3(Mathf.Sin(i2) * radius, 0, Mathf.Cos(i2) * radius);
+                    Gizmos.DrawLine(p1, p2);
+                }
             }
+            DrawDisc(radius, new Color(1, 0.6f, 0, 0.8f));
+            DrawDisc(range.x, new Color(0, 0.6f, 1, 1));
+            DrawDisc(range.y, new Color(0, 1, 0.6f, 1));
             Gizmos.color = Color.white;
-
         }
 
 #if UNITY_EDITOR

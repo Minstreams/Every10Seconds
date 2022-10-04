@@ -11,6 +11,7 @@ namespace IceEngine
         public Collider hitBox;
         public Collider aimBox;
         public float chaseDistance;
+        public int type;
         public override Handable CurrentInHand => weapon;
 
         [System.NonSerialized] public NavMeshAgent nav;
@@ -54,6 +55,7 @@ namespace IceEngine
             hitBox.enabled = true;
             aimBox.enabled = true;
             weapon.gameObject.SetActive(true);
+            anim.SetFloat("type", type);
         }
         public override void Harm(float harm, Vector3 push)
         {
