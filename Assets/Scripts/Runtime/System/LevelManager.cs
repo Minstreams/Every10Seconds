@@ -14,6 +14,7 @@ namespace IceEngine
     {
         public Player Player => Ice.Gameplay.Player;
         public UICanvasManager UIMgr => Ice.Gameplay.UIMgr;
+        IceEngine.Internal.SettingGameplay Setting => Ice.Gameplay.Setting;
 
         public Light sun;
         public AnimationCurve intensityCurve;
@@ -24,6 +25,9 @@ namespace IceEngine
         }
         void Start()
         {
+            // 清除上一局状态
+            Pickable.toPickList.Clear();
+
             // 初始化战斗UI
             UIMgr.OpenEye();
             UIMgr.SetBattleUI(true);
@@ -66,6 +70,8 @@ namespace IceEngine
                     yield return 0;
                 }
                 CurTime -= 20;
+
+                Data.days++;
             }
         }
 
@@ -89,11 +95,60 @@ namespace IceEngine
 
         #region Loot
         [NonSerialized] public int coin = 0;
+
         public void AddCoin(int c)
         {
             coin += c;
             UIMgr.UpdateLootCoin();
         }
+        public string GetStatisticText()
+        {
+            string res = "You've\n" +
+                (Data.coinAll > 0 ? $"earned {Data.coinAll} {Setting.coinMark}\n" : "") +
+               (Data.ammos > 0 ? $"shot {Data.ammos} bullets\n" : "") +
+               (Data.enemiesBeaten > 0 ? $"beaten {Data.enemiesBeaten} dead walks\n" : "") +
+                $"lived through {Data.days} days";
+            return res;
+        }
+        public string GetLootText()
+        {
+            string res = (coin > 0 ? $"You've earned {coin} {Setting.coinMark}\n" : "");
+            return res;
+        }
         #endregion
+
+        string sleepText = "";
+        public void EnterShelter()
+        {
+            // 结算
+            sleepText = GetLootText();
+
+            Data.coin += coin;
+            Data.coinAll += coin;
+            coin = 0;
+
+            UIMgr.OpenShelterUI();
+        }
+        public void ExitShelter()
+        {
+            UIMgr.CloseShelterUI();
+        }
+        public void Sleep()
+        {
+            UIMgr.CloseEye(sleepText);
+        }
+
+        public void Die()
+        {
+            // 清空统计数据
+            var text = GetStatisticText();
+            Data.id++;
+            Data.coinAll = 0;
+            Data.ammos = 0;
+            Data.enemiesBeaten = 0;
+            Data.days = 0;
+
+            UIMgr.CloseEye(text + $"\nnext seeker will follow your way." + $"\nRest in peace...");
+        }
     }
 }

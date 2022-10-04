@@ -93,47 +93,26 @@ namespace Ice
         [IcePacket]
         public sealed class PlayerData
         {
-            public int id = 1021;
+            // Status
             public int coin;    // 打敌人获取，用于各种增幅
-            public int coinAll; // 目前所有的金币
             public float hpBonus;
             public int mainWeaponMagBonus;
+
+            // Statistics   // 仅限一条命的数据，死了清空
+            public int id = 1021;
+            public int coinAll; // 目前获得过的所有的金币
+            public int ammos;   // 发射过的子弹数
+            public int enemiesBeaten;   // 打败的敌人
+            public int days;    // 本条命，过的天数
+
+            // Collections
             public bool foundFlashLight;
         }
         #endregion
     }
 }
 
-[Serializable]
-public class Dialog
-{
-    public Condition condition = new();
-    public List<DialogBlock> blockList = new();
-}
-[Serializable]
-public class DialogBlock
-{
-    public string content;
-    public List<DialogChoice> dialogChoices = new();
-}
-[Serializable]
-public class DialogChoice
-{
-    public string content;
-    public int nextId;
-    public UnityEvent action;
-}
 
-[Serializable]
-public class Condition
-{
-    public bool alwaysTrue;
-    public bool IsConditionMeet()
-    {
-        if (alwaysTrue) return true;
-        return false;
-    }
-}
 
 [System.Serializable]
 public class FloatEvent : UnityEngine.Events.UnityEvent<float> { }

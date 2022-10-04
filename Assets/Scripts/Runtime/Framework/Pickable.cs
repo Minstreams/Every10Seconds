@@ -10,7 +10,7 @@ namespace IceEngine
         #region Static
         static int? layerPick;
         static int? layerPickSelected;
-        static List<Pickable> toPickList = new();
+        public static List<Pickable> toPickList = new();
         static void OnPrePick(Pickable p)
         {
             p.meshObj.layer = layerPickSelected ??= LayerMask.NameToLayer("PickableSelected");

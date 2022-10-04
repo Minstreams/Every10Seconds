@@ -13,11 +13,12 @@ namespace IceEngine
         }
         protected override void OnMorning()
         {
-            tm.text = $"Good morning, NO. {Ice.Gameplay.Data.id}";
+            tm.text = $"Good morning, seeker NO. {Ice.Gameplay.Data.id}\n{ExtraText}";
         }
         protected override void OnEvening()
         {
-            tm.text = $"Good evening, NO. {Ice.Gameplay.Data.id}";
+            tm.text = $"Good evening, seeker NO. {Ice.Gameplay.Data.id}\n{ExtraText}";
         }
+        string ExtraText => Ice.Gameplay.CurLevel.GetStatisticText();
     }
 }

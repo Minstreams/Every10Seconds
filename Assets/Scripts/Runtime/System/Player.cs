@@ -94,7 +94,7 @@ namespace IceEngine
                 dropPos = hit.point;
             }
             GameObject.Instantiate(h.pickablePrefab, dropPos, Quaternion.identity);
-            Destroy(h);
+            Destroy(h.gameObject);
         }
 
         public void PickWeaponGun(PickableGun p)
@@ -231,7 +231,7 @@ namespace IceEngine
         public override void Die(Vector3 push)
         {
             base.Die(push);
-            Ice.Gameplay.UIMgr.CloseEye();
+            Ice.Gameplay.CurLevel.Die();
         }
     }
 }

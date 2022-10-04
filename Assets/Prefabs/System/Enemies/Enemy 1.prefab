@@ -941,6 +941,7 @@ MonoBehaviour:
   aimBox: {fileID: 5176144316234861722}
   chaseDistance: 0.5
   type: 1
+  coin: 1
 --- !u!195 &3827996310961954579
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -182,6 +182,7 @@ namespace IceEngine
 
         #region Black
         public Image black;
+        public Text blackText;
         public AnimationCurve openEyeCurve;
         public float openEyeTime;
         public AnimationCurve closeEyeCurve;
@@ -194,6 +195,7 @@ namespace IceEngine
         }
         IEnumerator RunOpenEye()
         {
+            blackText.text = "";
             float t = 0;
             while (t < 1)
             {
@@ -202,13 +204,16 @@ namespace IceEngine
                 t += Time.deltaTime / openEyeTime;
             }
         }
+        Coroutine closeEyeRoutine;
         [Button]
-        public void CloseEye()
+        public void CloseEye(string note)
         {
-            StartCoroutine(RunCloseEye());
+            if (closeEyeRoutine != null) return;
+            closeEyeRoutine = StartCoroutine(RunCloseEye(note));
         }
-        IEnumerator RunCloseEye()
+        IEnumerator RunCloseEye(string note)
         {
+            blackText.text = note;
             float t = 0;
             while (t < 1)
             {
@@ -218,6 +223,7 @@ namespace IceEngine
             }
             // EyeClosed, Restart
             UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            closeEyeRoutine = null;
         }
         #endregion
 
@@ -246,6 +252,7 @@ namespace IceEngine
 
             shelterUIObj.SetActive(true);
             UpdateCoin();
+            coinText.text = GetCoinText(lastCoin, Setting.coinMark);
 
             if (rShelterUpdate != null)
             {
@@ -263,7 +270,11 @@ namespace IceEngine
                 rShelterUpdate = null;
             }
 
+            lootCoin = lastLootCoin = 0;
             lootUIObj.SetActive(true);
+            UpdateLootCoin();
+            lootCoinText.text = GetCoinText(lastLootCoin, Setting.coinMark);
+
             if (rLootUpdate != null)
             {
                 StopCoroutine(rLootUpdate);

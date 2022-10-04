@@ -21,8 +21,8 @@ namespace IceEngine
         {
             base.OnPlayerEnter();
             CameraMgr.targetOrthographicSize = size;
-            if (isShelter) Ice.Gameplay.UIMgr.OpenShelterUI();
-            else Ice.Gameplay.UIMgr.CloseShelterUI();
+            if (isShelter) Ice.Gameplay.CurLevel.EnterShelter();
+            else Ice.Gameplay.CurLevel.ExitShelter();
         }
     }
 }

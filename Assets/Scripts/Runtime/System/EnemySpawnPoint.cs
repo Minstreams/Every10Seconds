@@ -18,6 +18,11 @@ namespace IceEngine
         [Label("生成范围半径")] public float radius;
         public Vector2 range;
         public Vector2 timeRange;
+        public Vector2Int coinRange;
+        public float weaponInterval = 5;
+        public float weaponRange = 2;
+        public float weaponHarm = 5;
+        public float weaponPush = 0.3f;
 
 
         float t;
@@ -39,6 +44,14 @@ namespace IceEngine
                         var e = Ice.Gameplay.CurLevel.GetEnemyAt(enemyList[Random.Range(0, enemyList.Count)], pos, transform.rotation);
                         e.maxHp = health;
                         e.nav.speed = speed;
+                        e.coin = Random.Range(coinRange.x, coinRange.y + 1);
+                        if (e.CurrentInHand is WeaponZombie wz)
+                        {
+                            wz.interval = weaponInterval;
+                            wz.range = weaponRange;
+                            wz.harm = weaponHarm;
+                            wz.push = weaponPush;
+                        }
                         e.SpawnAt(pos);
                         t += interval;
                     }

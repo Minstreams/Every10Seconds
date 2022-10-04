@@ -73,6 +73,7 @@ namespace IceEngine
             hitBox.enabled = false;
             aimBox.enabled = false;
             weapon.gameObject.SetActive(false);
+            Ice.Gameplay.Data.enemiesBeaten++;
             Ice.Gameplay.CurLevel.AddCoin(coin);
         }
 

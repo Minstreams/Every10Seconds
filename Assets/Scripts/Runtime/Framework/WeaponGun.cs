@@ -142,6 +142,7 @@ namespace IceEngine
                     }
                     var e = hit.collider.GetComponentInParent<Enemy>();
                     e.Harm(harm, ammoDir * push);
+                    Ice.Gameplay.Data.ammos++;
                     return true;
                 }
                 return false;
