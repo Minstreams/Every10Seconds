@@ -11,11 +11,12 @@ namespace IceEngine
     {
         public AudioSource onPickSound;
         public AudioSource notValidSound;
-        public override void OnPick()
+        public override bool OnPick()
         {
             var cur = Ice.Gameplay.Player.CurrentInHand;
             if (cur is WeaponGun gun && (gun.ammo != gun.maxAmmo || gun.mag != gun.maxMag))
             {
+                gun.CancelReload();
                 gun.slot.SetAmmo(gun.ammo = gun.maxAmmo);
                 gun.slot.SetMag(gun.mag = gun.maxMag);
                 onPickSound.Play();
@@ -24,6 +25,7 @@ namespace IceEngine
             {
                 notValidSound.Play();
             }
+            return false;
         }
     }
 }

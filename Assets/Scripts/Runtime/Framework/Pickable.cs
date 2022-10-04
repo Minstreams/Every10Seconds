@@ -68,10 +68,12 @@ namespace IceEngine
                 if (toPickList.Count > 0)
                 {
                     var p = toPickList[0];
-                    OnCancelPick(p);
-                    toPickList.RemoveAt(0);
-                    p.OnPick();
-                    if (toPickList.Count > 0) OnPrePick(toPickList[0]);
+                    if (p.OnPick())
+                    {
+                        OnCancelPick(p);
+                        toPickList.RemoveAt(0);
+                        if (toPickList.Count > 0) OnPrePick(toPickList[0]);
+                    }
                 }
             }
         }
@@ -83,7 +85,7 @@ namespace IceEngine
         public string hint = "捡起";
 
         // Configurations
-        public abstract void OnPick();
+        public abstract bool OnPick();
 
         protected override void OnPlayerEnter() => ToPick(this);
         protected override void OnPlayerExit() => CancelPick(this);

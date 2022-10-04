@@ -31,9 +31,10 @@ namespace IceEngine
             if (Sys.currentNPC != null) return;
             base.OnPlayerEnter();
         }
-        public override void OnPick()
+        public override bool OnPick()
         {
             Sys.StartDialog(GetDialog(), npcName);
+            return true;
         }
     }
 }

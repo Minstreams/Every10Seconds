@@ -13,10 +13,11 @@ namespace IceEngine
         public GameObject prefab;
         public int ammo = 15;
         public int mag = 15;
-        public override void OnPick()
+        public override bool OnPick()
         {
             Ice.Gameplay.Player.PickWeaponGun(this);
             Destroy(gameObject);
+            return true;
         }
     }
 }

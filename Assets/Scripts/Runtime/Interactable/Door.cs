@@ -9,9 +9,10 @@ namespace IceEngine
     {
         public GameObject doorObj;
         public GameObject doorMesh;
-        public override void OnPick()
+        public override bool OnPick()
         {
             doorObj.SetActive(false);
+            return true;
         }
         protected override void OnPlayerEnter()
         {

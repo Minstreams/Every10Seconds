@@ -75,6 +75,7 @@ namespace IceEngine
         public override void OnSwitchOff()
         {
             aimMark.gameObject.SetActive(false);
+            CancelReload();
         }
 
         public override void OnUpdate()
@@ -167,6 +168,14 @@ namespace IceEngine
         {
             reloadSound.Play();
             reloadCoroutine = StartCoroutine(RunReload(reloadTime));
+        }
+        public void CancelReload()
+        {
+            if (IsReloading)
+            {
+                StopCoroutine(reloadCoroutine);
+                reloadCoroutine = null;
+            }
         }
 
         Coroutine reloadCoroutine;
