@@ -21,7 +21,7 @@ namespace IceEngine
 #endif
         protected override void OnPlayerEnter()
         {
-            Ice.Gameplay.Escape();
+            //Ice.Gameplay.Escape();
         }
     }
 }

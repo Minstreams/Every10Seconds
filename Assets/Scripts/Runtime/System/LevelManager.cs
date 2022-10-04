@@ -33,6 +33,9 @@ namespace IceEngine
             Player.SpawnAt(pos);
             Player.SwitchToWeaponBasic();
 
+            // 保存数据
+            Ice.Gameplay.SaveData();
+
             StartCoroutine(RunInLevel());
         }
         IEnumerator RunInLevel()

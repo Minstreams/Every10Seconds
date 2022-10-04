@@ -16,10 +16,6 @@ namespace Ice
         public static bool isMorning;
         public static Action onMorning;
         public static Action onEvening;
-        public static void Escape()
-        {
-            UIMgr.ShowNotification("Escape");
-        }
         #endregion
 
         #region Utility
@@ -67,6 +63,39 @@ namespace Ice
             currentNPC = null;
             curDialog = null;
             UIMgr.CloseDialog();
+        }
+        #endregion
+
+        #region Save Data
+        public static string SavePath => "save.bts";
+        public static PlayerData Data { get; set; }
+        public static void SaveData()
+        {
+            Save.Binary.SaveToFile(Data, SavePath);
+        }
+        public static void LoadData()
+        {
+            try
+            {
+                Data = Save.Binary.LoadFromFile(SavePath) as PlayerData;
+            }
+            catch
+            {
+                Data = new PlayerData();
+            }
+        }
+        static void Awake()
+        {
+            LoadData();
+        }
+
+        [IcePacket]
+        public sealed class PlayerData
+        {
+            public int coin;    // 打敌人获取，用于各种增幅
+            public float hpBonus;
+            public int mainWeaponMagBonus;
+            public bool foundFlashLight;
         }
         #endregion
     }
