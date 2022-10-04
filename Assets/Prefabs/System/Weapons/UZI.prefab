@@ -76,6 +76,7 @@ MonoBehaviour:
     m_Bits: 13377
   maxMag: 120
   infiniteAmmo: 0
+  accurate: 0.03
   slotPrefab: {fileID: 1271916850363780950, guid: 0eafc70616e2a474cad9068bd3b8513d,
     type: 3}
   aimMark: {fileID: 6801797203034747907}
@@ -213,6 +214,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AmmoParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955931715339680129, guid: e5edb78b49ba6874b94647cdd6ddd1b9,
+        type: 3}
+      propertyPath: EmissionModule.enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5955931715339680129, guid: e5edb78b49ba6874b94647cdd6ddd1b9,
         type: 3}

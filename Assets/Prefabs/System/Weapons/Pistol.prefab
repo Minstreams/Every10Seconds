@@ -78,6 +78,7 @@ MonoBehaviour:
     m_Bits: 13377
   maxMag: 30
   infiniteAmmo: 1
+  accurate: 0.1
   slotPrefab: {fileID: 1271916850363780950, guid: 471f3a0872f311d42a4d46531c373012,
     type: 3}
   aimMark: {fileID: 7503485924428018046}
@@ -349,6 +350,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AmmoParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955931715339680129, guid: e5edb78b49ba6874b94647cdd6ddd1b9,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.b
+      value: 0.5518868
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955931715339680129, guid: e5edb78b49ba6874b94647cdd6ddd1b9,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 0.82860863
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955931715339680129, guid: e5edb78b49ba6874b94647cdd6ddd1b9,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.b
+      value: 0.2688679
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955931715339680129, guid: e5edb78b49ba6874b94647cdd6ddd1b9,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.g
+      value: 0.34022668
       objectReference: {fileID: 0}
     - target: {fileID: 7279271940156822110, guid: e5edb78b49ba6874b94647cdd6ddd1b9,
         type: 3}

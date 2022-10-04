@@ -34,6 +34,7 @@ namespace IceEngine
         public LayerMask shotLayerMask;
         public int maxMag = 30;
         public bool infiniteAmmo;
+        public float accurate = 0;
 
         [Header("UI")]
         public GameObject slotPrefab;
@@ -107,7 +108,7 @@ namespace IceEngine
 
             slot.SetAmmo(--ammo);
 
-            Vector3 ammoDir = (AimPos - gunPoint.position).normalized;
+            Vector3 ammoDir = ((AimPos - gunPoint.position).normalized + UnityEngine.Random.insideUnitSphere * accurate).normalized;
             Vector3 hitPoint = gunPoint.position + ammoDir * maxDis;
             if (Physics.Raycast(gunPoint.position, ammoDir, out var hit, maxDis, shotLayerMask))
             {
