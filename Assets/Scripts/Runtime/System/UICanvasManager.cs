@@ -26,20 +26,24 @@ namespace IceEngine
         [Range(0.1f, 10f)]
         public float notificationTime = 1;
 
+        Queue<string> notificationQueue = new();
         public void ShowNotification(string msg)
         {
             if (rNotification != null)
             {
-                StopCoroutine(rNotification);
-                rNotification = null;
+                notificationQueue.Enqueue(msg);
             }
-            rNotification = StartCoroutine(RunShowNotification(msg));
-            Debug.Log("Notification: " + msg);
+            else
+            {
+                rNotification = StartCoroutine(RunShowNotification(msg));
+            }
         }
 
         Coroutine rNotification;
         IEnumerator RunShowNotification(string msg)
         {
+            Debug.Log("Notification: " + msg);
+
             notificationText.text = msg;
             float t = 0;
             while (t < 1)
@@ -49,6 +53,9 @@ namespace IceEngine
                 notification.anchoredPosition = new Vector2(0, notificationyCurve.Evaluate(t));
             }
             notification.anchoredPosition = Vector2.zero;
+
+            if (notificationQueue.Count > 0) rNotification = StartCoroutine(RunShowNotification(notificationQueue.Dequeue()));
+            else rNotification = null;
         }
         #endregion
 
@@ -301,7 +308,7 @@ namespace IceEngine
         {
             while (true)
             {
-                coin += (coinTarget - coin) * coinJumpRate;
+                coin += (coinTarget - 0.1f - coin) * coinJumpRate;
                 coinText.color = Color.Lerp(coinText.color, new Color(0.8f, 0.8f, 0.8f), coinJumpRate);
                 var c = Mathf.CeilToInt(coin);
                 if (c != lastCoin)
@@ -326,7 +333,7 @@ namespace IceEngine
         {
             while (true)
             {
-                lootCoin += (lootCoinTarget - lootCoin) * coinJumpRate;
+                lootCoin += (lootCoinTarget - 0.1f - lootCoin) * coinJumpRate;
                 lootCoinText.color = Color.Lerp(lootCoinText.color, new Color(0.8f, 0.8f, 0.8f), coinJumpRate);
                 var c = Mathf.CeilToInt(lootCoin);
                 if (c != lastLootCoin)

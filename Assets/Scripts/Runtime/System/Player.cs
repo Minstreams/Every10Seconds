@@ -115,6 +115,8 @@ namespace IceEngine
 
         public void PickWeaponGun(PickableGun p)
         {
+            if (isDead) return;
+
             var weapon = GameObject.Instantiate(p.prefab).GetComponent<Weapon>();
             weapon.owner = this;
             weapon.OnPick(p);
@@ -133,6 +135,8 @@ namespace IceEngine
         }
         public void PickItem(PickableItem p)
         {
+            if (isDead) return;
+
             var it = GameObject.Instantiate(p.prefab).GetComponent<Item>();
             it.owner = this;
             it.OnPick(p);
