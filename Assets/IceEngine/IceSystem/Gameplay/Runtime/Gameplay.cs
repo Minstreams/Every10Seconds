@@ -71,6 +71,9 @@ namespace Ice
         public static PlayerData Data { get; set; }
         public static void SaveData()
         {
+            // 序列化
+            Data.unlockedList.Clear();
+            Data.unlockedList.AddRange(Data.unlockedSet);
             Save.Binary.SaveToFile(Data, SavePath);
             UIMgr.ShowNotification("Progress Saved.");
         }
@@ -79,6 +82,10 @@ namespace Ice
             try
             {
                 Data = Save.Binary.LoadFromFile(SavePath) as PlayerData;
+                foreach (var l in Data.unlockedList)
+                {
+                    Data.unlockedSet.Add(l);
+                }
             }
             catch
             {
@@ -106,7 +113,9 @@ namespace Ice
             public int days;    // 本条命，过的天数
 
             // Collections
-            public bool foundFlashLight;
+            [NonSerialized] public HashSet<string> unlockedSet = new();
+            public List<string> unlockedList = new();
+            public bool IsUnlocked(string name) => unlockedSet.Contains(name);
         }
         #endregion
     }

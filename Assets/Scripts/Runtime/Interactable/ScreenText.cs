@@ -7,7 +7,7 @@ namespace IceEngine
     public class ScreenText : TimerBehaviour
     {
         TextMesh tm;
-        void Start()
+        void Awake()
         {
             tm = GetComponent<TextMesh>();
         }

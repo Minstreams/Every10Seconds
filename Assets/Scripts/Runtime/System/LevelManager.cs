@@ -31,6 +31,7 @@ namespace IceEngine
             // 初始化战斗UI
             UIMgr.OpenEye();
             UIMgr.SetBattleUI(true);
+            UIMgr.OpenShelterUI();
 
             // 玩家生成
             var sp = FindObjectOfType<SpawnPoint>();

@@ -117,18 +117,21 @@ namespace IceEngine
         {
             if (isDead) return;
 
-            var weapon = GameObject.Instantiate(p.prefab).GetComponent<Weapon>();
-            weapon.owner = this;
-            weapon.OnPick(p);
             if (p.type == WeaponSlotType.Basic)
             {
                 DropWeaponBasic();
+                var weapon = GameObject.Instantiate(p.prefab).GetComponent<Weapon>();
+                weapon.owner = this;
+                weapon.OnPick(p);
                 weaponBasic = weapon;
                 SwitchToWeaponBasic();
             }
             else if (p.type == WeaponSlotType.Main)
             {
                 DropWeaponMain();
+                var weapon = GameObject.Instantiate(p.prefab).GetComponent<Weapon>();
+                weapon.owner = this;
+                weapon.OnPick(p);
                 weaponMain = weapon;
                 SwitchToWeaponMain();
             }
@@ -136,12 +139,11 @@ namespace IceEngine
         public void PickItem(PickableItem p)
         {
             if (isDead) return;
+            DropItem();
 
             var it = GameObject.Instantiate(p.prefab).GetComponent<Item>();
             it.owner = this;
             it.OnPick(p);
-
-            DropItem();
             item = it;
             SwitchToItem();
         }

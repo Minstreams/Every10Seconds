@@ -11,6 +11,7 @@ namespace IceEngine
         public GameObject slotPrefab;
         public Transform aimMark;
         public Sprite icon;
+        public bool lockTarget = true;
 
         [NonSerialized] public SlotItem slot;
 
@@ -26,18 +27,21 @@ namespace IceEngine
         }
         public override void OnUpdate()
         {
-            transform.LookAt(AimPos);
-            aimMark.position = AimPos;
-            aimMark.LookAt(Camera.main.transform);
+            if (lockTarget) transform.LookAt(AimPos);
+            if (aimMark != null)
+            {
+                aimMark.position = AimPos;
+                aimMark.LookAt(Camera.main.transform);
+            }
         }
 
         public override void OnSwitchOn()
         {
-            aimMark.gameObject.SetActive(true);
+            if (aimMark != null) aimMark.gameObject.SetActive(true);
         }
         public override void OnSwitchOff()
         {
-            aimMark.gameObject.SetActive(false);
+            if (aimMark != null) aimMark.gameObject.SetActive(false);
         }
-    } 
+    }
 }

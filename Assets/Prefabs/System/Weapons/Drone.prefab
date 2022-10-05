@@ -138,7 +138,7 @@ MonoBehaviour:
   slotPrefab: {fileID: 1693761587624705159, guid: de522db341d29684f99cb8a4bb6fc2d1,
     type: 3}
   aimMark: {fileID: 7710148699751224987}
-  icon: {fileID: 21300000, guid: 389013ec8bfcc7d4999814585a184981, type: 3}
+  icon: {fileID: 21300000, guid: f1750385efaeb5642b81b90663a0fd5d, type: 3}
   droneDisplayerPrefab: {fileID: 2771041320235582945, guid: 2041d1cba958d54428aecf68d4daf044,
     type: 3}
 --- !u!1001 &8694543548192735180

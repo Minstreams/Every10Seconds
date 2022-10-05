@@ -15,7 +15,6 @@ namespace IceEngine
         {
             DontDestroyOnLoad(gameObject);
             Awake_Battle();
-            OpenShelterUI();
         }
 
         #region Notification
