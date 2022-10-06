@@ -15,7 +15,7 @@ namespace IceEngine
         {
             autoShootRoutine = StartCoroutine(RunAutoShoot());
         }
-        public override void OnEndUse()
+        public override void OnRelease()
         {
             if (autoShootRoutine != null)
             {

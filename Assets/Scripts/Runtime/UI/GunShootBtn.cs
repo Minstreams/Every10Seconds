@@ -7,7 +7,7 @@ namespace IceEngine
 {
     public class GunShootBtn : MonoBehaviour
     {
-        public void OnShoot() => Ice.Gameplay.Player.Shoot();
-        public void OnReleseShoot() => Ice.Gameplay.Player.ReleaseShoot();
+        public void OnShoot() => Ice.Gameplay.Player.UseCurrent();
+        public void OnReleseShoot() => Ice.Gameplay.Player.ReleaseCurrent();
     }
 }

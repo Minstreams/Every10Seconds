@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace IceEngine
 {
-    public class SlotGun : MonoBehaviour
+    public class SlotGun : SlotBase
     {
         public Text ammoText;
         public Text magText;

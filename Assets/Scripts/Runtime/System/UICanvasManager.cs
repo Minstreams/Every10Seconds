@@ -194,10 +194,12 @@ namespace IceEngine
         public AnimationCurve closeEyeCurve;
         public float closeEyeTime;
 
+        Coroutine openEyeRoutine;
         [Button]
         public void OpenEye()
         {
-            StartCoroutine(RunOpenEye());
+            if (openEyeRoutine != null) StopCoroutine(openEyeRoutine);
+            openEyeRoutine = StartCoroutine(RunOpenEye());
         }
         IEnumerator RunOpenEye()
         {
@@ -209,11 +211,17 @@ namespace IceEngine
                 yield return 0;
                 t += Time.deltaTime / openEyeTime;
             }
+            openEyeRoutine = null;
         }
         Coroutine closeEyeRoutine;
         [Button]
         public void CloseEye(string note)
         {
+            if (openEyeRoutine != null)
+            {
+                StopCoroutine(openEyeRoutine);
+                openEyeRoutine = null;
+            }
             if (closeEyeRoutine != null) return;
             closeEyeRoutine = StartCoroutine(RunCloseEye(note));
         }

@@ -42,6 +42,7 @@ namespace IceEngine
 
         public override void OnCheckHit()
         {
+            base.OnCheckHit();
             if (IsInRange)
             {
                 Ice.Gameplay.Player.Harm(harm, transform.forward * push);

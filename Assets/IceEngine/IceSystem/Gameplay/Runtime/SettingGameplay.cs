@@ -10,6 +10,7 @@ namespace IceEngine.Internal
         public GameObject playerPrefab;
 
         public string coinMark = "✪";
+        public float enemyWeight = 15;
 
         [Group]
         public LayerMask maskPlayerAim;

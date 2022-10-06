@@ -38,10 +38,6 @@ namespace IceEngine
         public float accurate = 0;
         public bool goThroughEnemies;
 
-        [Group("UI")]
-        public GameObject slotPrefab;
-        public Transform aimMark;
-
         [Group("装弹")]
         public AudioSource reloadSound;
         public AudioSource reloadedSound;
@@ -65,49 +61,32 @@ namespace IceEngine
                 lineCorList.Add(null);
             }
         }
-        public override void OnPick(Pickable p)
+        public override Slot GetSlot() => weaponType switch
+        {
+            WeaponSlotType.Basic => Ice.Gameplay.UIMgr.slotBasic,
+            WeaponSlotType.Main => Ice.Gameplay.UIMgr.slotMain,
+            _ => Ice.Gameplay.UIMgr.slotBasic,
+        };
+        public override void OnPick(Pickable p, SlotBase s)
         {
             var pb = p as PickableGun;
             ammo = pb.ammo;
             mag = pb.mag;
 
-            var uiSlot = weaponType switch
-            {
-                WeaponSlotType.Basic => Ice.Gameplay.UIMgr.slotBasic,
-                WeaponSlotType.Main => Ice.Gameplay.UIMgr.slotMain,
-                _ => Ice.Gameplay.UIMgr.slotBasic,
-            };
-            slot = uiSlot.Load(slotPrefab).GetComponent<SlotGun>();
+            slot = s as SlotGun;
             slot.SetAmmo(ammo);
             slot.SetMag(mag);
-        }
-        public override void OnDrop()
-        {
-            var uiSlot = weaponType switch
-            {
-                WeaponSlotType.Basic => Ice.Gameplay.UIMgr.slotBasic,
-                WeaponSlotType.Main => Ice.Gameplay.UIMgr.slotMain,
-                _ => Ice.Gameplay.UIMgr.slotBasic,
-            };
-            uiSlot.Unload();
         }
 
         public override void OnSwitchOn()
         {
+            base.OnSwitchOn();
             reloadedSound.Play();
-            aimMark.gameObject.SetActive(true);
         }
         public override void OnSwitchOff()
         {
-            aimMark.gameObject.SetActive(false);
+            base.OnSwitchOff();
             CancelReload();
-        }
-
-        public override void OnUpdate()
-        {
-            transform.LookAt(AimPos);
-            aimMark.position = AimPos;
-            aimMark.LookAt(Camera.main.transform);
         }
 
         void FixedUpdate()
@@ -146,15 +125,18 @@ namespace IceEngine
 
                 if (hit.rigidbody != null)
                 {
-                    hit.rigidbody.AddForce(15 * push * ammoDir, ForceMode.Impulse);
+                    hit.rigidbody.AddForce(Setting.enemyWeight * push * ammoDir, ForceMode.Impulse);
                 }
 
                 if (hit.collider.gameObject.layer == Setting.LayerEnemy)
                 {
                     var e = hit.collider.GetComponentInParent<Enemy>();
-                    e.Harm(harm, ammoDir * push);
-                    Ice.Gameplay.Data.ammos++;
-                    return true;
+                    if (e != null)
+                    {
+                        e.Harm(harm, ammoDir * push);
+                        Ice.Gameplay.Data.ammos++;
+                        return true;
+                    }
                 }
                 return false;
             }
