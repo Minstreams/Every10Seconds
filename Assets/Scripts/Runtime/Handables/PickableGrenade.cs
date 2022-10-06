@@ -5,7 +5,7 @@ namespace IceEngine
 {
     public class PickableGrenade : Pickable
     {
-
+        [Label("基本属性")] public GrenadeInfo info;
 
         public override bool OnPick()
         {

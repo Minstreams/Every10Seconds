@@ -35,6 +35,8 @@ namespace IceEngine
 
         void SetColor(Color c)
         {
+            if (slotButton == null) return;
+
             var cs = slotButton.colors;
             cs.normalColor = c;
             slotButton.colors = cs;

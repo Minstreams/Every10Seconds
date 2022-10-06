@@ -78,6 +78,15 @@ namespace IceEngine
             slot.SetMag(mag);
         }
 
+        public override void OnDrop(Pickable p)
+        {
+            if (p == null) return;
+
+            var pb = p as PickableGun;
+            pb.ammo = ammo;
+            pb.mag = mag;
+        }
+
         public override void OnSwitchOn()
         {
             base.OnSwitchOn();

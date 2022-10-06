@@ -6,5 +6,6 @@ namespace IceEngine
     public abstract class Pickable : Interactable
     {
         public GameObject prefab;
+        public bool replaceCurrentDirrectly = false;
     }
 }

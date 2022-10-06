@@ -75,6 +75,10 @@ namespace IceEngine
             {
                 SwitchToItem();
             }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                SwitchToGrenade();
+            }
         }
 
         #region Life
@@ -161,13 +165,17 @@ namespace IceEngine
             }
             currentInHand = h;
         }
-        void Pick(Pickable p)
+        Handable Pick(Pickable p)
         {
-
+            var h = Instantiate(p.prefab).GetComponent<Handable>();
+            h.owner = this;
+            h.OnPick(p, h.GetSlot().Load(h.slotPrefab).GetComponent<SlotBase>());
+            return h;
         }
         public void Drop(Handable h, bool generatePickable = true)
         {
             if (h == null) return;
+            Pickable p = null;
             if (generatePickable)
             {
                 Vector3 dropPos = posHand.position;
@@ -175,11 +183,11 @@ namespace IceEngine
                 {
                     dropPos = hit.point;
                 }
-                GameObject.Instantiate(h.pickablePrefab, dropPos, Quaternion.identity);
+                p = GameObject.Instantiate(h.pickablePrefab, dropPos, Quaternion.identity).GetComponent<Pickable>();
             }
             var slot = h.GetSlot();
             if (slot != null) slot.Unload();
-            h.OnDrop();
+            h.OnDrop(p);
             Destroy(h.gameObject);
         }
         public void UseCurrent()
@@ -205,26 +213,14 @@ namespace IceEngine
 
             if (p.type == WeaponSlotType.Basic)
             {
-                DropWeaponBasic();
-            }
-            else if (p.type == WeaponSlotType.Main)
-            {
-                DropWeaponMain();
-            }
-
-            var weapon = GameObject.Instantiate(p.prefab).GetComponent<Weapon>();
-            weapon.owner = this;
-            var slotObj = weapon.GetSlot().Load(weapon.slotPrefab);
-            weapon.OnPick(p, slotObj.GetComponent<SlotBase>());
-
-            if (p.type == WeaponSlotType.Basic)
-            {
-                weaponBasic = weapon;
+                DropWeaponBasic(!p.replaceCurrentDirrectly);
+                weaponBasic = Pick(p) as Weapon;
                 SwitchToWeaponBasic();
             }
             else if (p.type == WeaponSlotType.Main)
             {
-                weaponMain = weapon;
+                DropWeaponMain(!p.replaceCurrentDirrectly);
+                weaponMain = Pick(p) as Weapon;
                 SwitchToWeaponMain();
             }
         }
@@ -262,12 +258,9 @@ namespace IceEngine
         public void PickItem(PickableItem p)
         {
             if (isDead) return;
-            DropItem();
 
-            var it = GameObject.Instantiate(p.prefab).GetComponent<Item>();
-            it.owner = this;
-            it.OnPick(p, it.GetSlot().Load(it.slotPrefab).GetComponent<SlotBase>());
-            item = it;
+            DropItem(!p.replaceCurrentDirrectly);
+            item = Pick(p) as Item;
             SwitchToItem();
         }
         public void SwitchToItem()
@@ -292,26 +285,48 @@ namespace IceEngine
 
         void PlaceAllGrenades()
         {
-
+            foreach (var g in grenadeList) g.GetSlot().Unload();
+            for (int i = 0; i < grenadeList.Count; ++i)
+            {
+                var g = grenadeList[i];
+                g.ID = i;
+                g.OnPlacedInSlot(g.GetSlot().Load(g.slotPrefab).GetComponent<SlotItem>());
+            }
         }
         public void PickGrenade(PickableGrenade p)
         {
             if (isDead) return;
-            if (grenadeList.Count >= grenadeCount) DropGrenade();
+            if (grenadeList.Count >= grenadeCount) DropLastGrenade(!p.replaceCurrentDirrectly);
 
-            var g = GameObject.Instantiate(p.prefab).GetComponent<Grenade>();
+            var g = Instantiate(p.prefab).GetComponent<Grenade>();
             g.owner = this;
+            g.ID = grenadeList.Count;
+            g.OnPick(p, g.GetSlot().Load(g.slotPrefab).GetComponent<SlotBase>());
+            grenadeList.Add(g);
+        }
+        public void SwitchToGrenade()
+        {
+            SwitchTo(grenadeList[^1]);
+            Ice.Gameplay.UIMgr.OnSwitchSlot(4);
         }
         public void DropGrenade(bool generatePickable = true)
         {
-
+            if (grenadeList.Count == 0) return;
+            Drop(grenadeList[^1], generatePickable);
+            grenadeList.RemoveAt(grenadeList.Count - 1);
+        }
+        public void DropLastGrenade(bool generatePickable = true)
+        {
+            if (grenadeList.Count == 0) return;
+            Drop(grenadeList[0], generatePickable);
+            grenadeList.RemoveAt(0);
+            PlaceAllGrenades();
         }
         public void ThrowGrenade()
         {
-
+            grenadeList[^1].OnUse();
         }
         #endregion
-
 
         #endregion
 

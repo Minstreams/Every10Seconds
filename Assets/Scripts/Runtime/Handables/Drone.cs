@@ -9,7 +9,6 @@ namespace IceEngine
         public GameObject droneDisplayerPrefab;
         public override void OnUse()
         {
-            Ice.Gameplay.Player.DropItem(false);
             var go = GameObject.Instantiate(droneDisplayerPrefab);
             int coin = Ice.Gameplay.CurLevel.coin;
             Ice.Gameplay.CurLevel.OnDroneEnterShelter();
@@ -22,6 +21,7 @@ namespace IceEngine
                 }
                 Destroy(go);
             });
+            Ice.Gameplay.Player.DropItem(false);
         }
     }
 }

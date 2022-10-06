@@ -9,5 +9,6 @@ namespace IceEngine
     {
         public void OnShoot() => Ice.Gameplay.Player.UseCurrent();
         public void OnReleseShoot() => Ice.Gameplay.Player.ReleaseCurrent();
+        public void OnThrowGrenade() => Ice.Gameplay.Player.ThrowGrenade();
     }
 }

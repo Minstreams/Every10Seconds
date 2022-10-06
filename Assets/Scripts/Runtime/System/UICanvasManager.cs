@@ -63,8 +63,9 @@ namespace IceEngine
         public GameObject battleUIRoot;
         public Slot slotMain;
         public Slot slotBasic;
-        public Slot slotGrenade;
         public Slot slotItem;
+        public Slot slotGrenadeRect;
+        public List<Slot> slotGrenadeList = new();
         public Text hintText;
         public RectTransform hpBarRect;
         public RectTransform hpBar;
@@ -83,6 +84,10 @@ namespace IceEngine
             {
                 Player.SwitchToItem();
             });
+            slotGrenadeRect.OnClick(() =>
+            {
+                Player.SwitchToGrenade();
+            });
             CloseDialog();
         }
         public void OnSwitchSlot(int index)
@@ -99,7 +104,7 @@ namespace IceEngine
                     slotItem.Select();
                     break;
                 case 4:
-                    slotGrenade.Select();
+                    slotGrenadeRect.Select();
                     break;
             }
         }

@@ -104,6 +104,7 @@ namespace Ice
             public int coin;    // 打敌人获取，用于各种增幅
             public float hpBonus;
             public int mainWeaponMagBonus;
+            public int grenadeCountBonus;
 
             // Statistics   // 仅限一条命的数据，死了清空
             public int id = 1021;

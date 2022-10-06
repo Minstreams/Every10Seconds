@@ -98,6 +98,7 @@ Transform:
   - {fileID: 4488396977023018}
   - {fileID: 4521798819244054}
   - {fileID: 4852978516526190}
+  - {fileID: 5469831308897863885}
   m_Father: {fileID: 4095579351926050}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1471,11 +1472,11 @@ MonoBehaviour:
   posHand: {fileID: 4986665698490072}
   posWeaponBasic: {fileID: 4938905180366354862}
   posWeaponMain: {fileID: 5615606604031169234}
-  posGrenade: {fileID: 0}
   posItem: {fileID: 7560671051900591398}
-  aimMask:
-    serializedVersion: 2
-    m_Bits: 11329
+  posGrenadeList:
+  - {fileID: 5469831308897863885}
+  - {fileID: 5469831308897863885}
+  grenadeCount: 2
   coinEmitter: {fileID: 2968110142203176481}
 --- !u!114 &114166066168210356
 MonoBehaviour:
@@ -1607,7 +1608,10 @@ MonoBehaviour:
   ikLeftHand: 0
   ikRightHand: 0
   pickablePrefab: {fileID: 0}
+  slotPrefab: {fileID: 0}
   aimEnemy: 1
+  aimMark: {fileID: 0}
+  lockTarget: 1
 --- !u!1 &1668710754680664
 GameObject:
   m_ObjectHideFlags: 0
@@ -2385,6 +2389,37 @@ Transform:
   m_Father: {fileID: 4218713496361002}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -80.562, y: 0, z: 90}
+--- !u!1 &8811422013651965592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5469831308897863885}
+  m_Layer: 9
+  m_Name: PosGrenade1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5469831308897863885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8811422013651965592}
+  m_LocalRotation: {x: 0.18413752, y: -0.9218495, z: -0.34049174, w: -0.01876913}
+  m_LocalPosition: {x: -0.292, y: 0.086, z: -0.255}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4576152570930330}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: -140.604, y: 6.746994, z: -3085.01}
 --- !u!1001 &806997773858192431
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,17 +11,28 @@ namespace IceEngine
     {
         public static Internal.SettingGameplay Setting => Ice.Gameplay.Setting;
 
-        [Label("爆炸时长")] public float time = 3;
-        [Label("撞击减少时长")] public float hitTimeCost = 0;
-        [Label("爆炸范围")] public float range = 3;
-        public float harm = 1;
-        public float push = 1;
+        [Label("基本属性")] public GrenadeInfo info;
+
+        [Group]
         public AnimationCurve pushCurve = AnimationCurve.Linear(0, 1, 1, 0);
-        [Label("友伤")] public bool harmPlayer = true;
         [Label("爆炸回调")] public SimpleEvent onExplode;
 
         Transform Center => transform;
         float timer = 0;
+        public void ThrowTo(Vector3 aimPos, float speed)
+        {
+            var g = Physics.gravity.y;
+            var pos = transform.position;
+            var vec = aimPos - pos;
+            var vecXZ = vec; vecXZ.y = 0;
+            var disXZ = vecXZ.magnitude;
+            var t = disXZ / speed;
+            var speedY = (vec.y - 0.5f * g * t * t) / t;
+
+            GetComponent<Rigidbody>().velocity = vecXZ * speed + Vector3.up * speedY;
+
+            StartTick();
+        }
         [Button]
         public void StartTick()
         {
@@ -30,7 +41,7 @@ namespace IceEngine
         }
         IEnumerator RunTick()
         {
-            timer = time;
+            timer = info.time;
             while (timer > 0)
             {
                 yield return 0;
@@ -39,16 +50,16 @@ namespace IceEngine
 
             // Explode
             LayerMask mask = 1 << Setting.LayerEnemy;
-            if (harmPlayer) mask |= 1 << Setting.LayerPlayer;
+            if (info.harmPlayer) mask |= 1 << Setting.LayerPlayer;
             onExplode?.Invoke();
-            var cols = Physics.OverlapSphere(Center.position, range, mask, QueryTriggerInteraction.Ignore);
+            var cols = Physics.OverlapSphere(Center.position, info.range, mask, QueryTriggerInteraction.Ignore);
             HashSet<Enemy> hittedEnemySet = new();
             foreach (var col in cols)
             {
                 var vec = col.transform.position - Center.position;
                 var len = vec.magnitude;
                 var dir = vec / len;
-                var p = push * pushCurve.Evaluate(len / range);
+                var p = info.push * pushCurve.Evaluate(len / info.range);
 
                 var rig = col.attachedRigidbody;
                 if (rig != null)
@@ -63,7 +74,7 @@ namespace IceEngine
                         if (!hittedEnemySet.Contains(e))
                         {
                             hittedEnemySet.Add(e);
-                            e.Harm(harm, dir * p);
+                            e.Harm(info.harm, dir * p);
                         }
                     }
                 }
@@ -71,14 +82,14 @@ namespace IceEngine
         }
         private void OnCollisionEnter(Collision collision)
         {
-            timer -= hitTimeCost;
+            timer -= info.hitTimeCost;
         }
 
         void OnDrawGizmos()
         {
             using (new GizmosColorScope(Color.red))
             {
-                Gizmos.DrawWireSphere(Center.position, range);
+                Gizmos.DrawWireSphere(Center.position, info.range);
             }
             using (new GizmosColorScope(Color.red))
             {
@@ -86,7 +97,7 @@ namespace IceEngine
             }
             using (new GizmosColorScope(Color.green))
             {
-                var h = timer / time;
+                var h = timer / info.time;
                 Gizmos.DrawCube(transform.position + new Vector3(-0.5f + 0.5f * h, 1.2f, 0), new Vector3(h, 0.1f, 0.1f));
             }
         }
