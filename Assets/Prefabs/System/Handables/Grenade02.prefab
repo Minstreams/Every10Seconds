@@ -66,7 +66,7 @@ MonoBehaviour:
   instancePrefab: {fileID: 1419459529042656408, guid: 7086fd085a7ee0f408f7331a8bb7c680,
     type: 3}
   icon: {fileID: 21300000, guid: f1750385efaeb5642b81b90663a0fd5d, type: 3}
-  throwSpeed: 5
+  throwSpeed: 3
 --- !u!1 &6875592911575394972
 GameObject:
   m_ObjectHideFlags: 0
