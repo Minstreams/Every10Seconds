@@ -2,7 +2,6 @@
 
 namespace IceEngine.Internal
 {
-    [IceSettingPath("IceEngine/IceSystem/Gameplay")]
     public class SettingGameplay : Framework.IceSetting<SettingGameplay>
     {
         public GameObject spawnPointPrefab;

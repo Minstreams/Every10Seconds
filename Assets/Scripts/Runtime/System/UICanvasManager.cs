@@ -18,7 +18,7 @@ namespace IceEngine
         }
 
         #region Notification
-        [Header("Notification")]
+        [Group("Notification")]
         public RectTransform notification;
         public Text notificationText;
         public AnimationCurve notificationyCurve;
@@ -59,7 +59,7 @@ namespace IceEngine
         #endregion
 
         #region Battle
-        [Header("Battle")]
+        [Group("Battle")]
         public GameObject battleUIRoot;
         public Slot slotMain;
         public Slot slotBasic;
@@ -234,7 +234,7 @@ namespace IceEngine
         #endregion
 
         #region Shelter
-        [Header("Shelter")]
+        [Group("Shelter")]
         public GameObject shelterUIObj;
         public GameObject lootUIObj;
         public Text coinText;

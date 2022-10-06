@@ -1,6 +1,6 @@
 ﻿namespace IceEngine.Internal
 {
-    [IceSettingPath("IceEngine/IceSystem/Level")]
+    [IceSettingPath("IceExngine/IceSystem/Level")]
     public class SettingLevel : Framework.IceSetting<SettingLevel>
     {
 

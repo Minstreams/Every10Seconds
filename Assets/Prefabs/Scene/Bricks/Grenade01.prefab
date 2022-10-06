@@ -185,13 +185,13 @@ Material:
     m_Floats:
     - _AlphaThres: 0.5
     - _Angle: 0.1
-    - _QueueControl: -1
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0
     - _ThresRange: 0.1
     m_Colors:
-    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionTarget: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 0.71698093, g: 5.8382425, b: 8, a: 1}
+    - _EmissionTarget: {r: 0.1745283, g: 0.79479796, b: 1, a: 1}
     - _MetallicColor: {r: 0, g: 0, b: 0, a: 0}
     - _Tint: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
@@ -368,7 +368,7 @@ Texture2D:
   m_Name: Texture
   m_ImageContentsHash:
     serializedVersion: 2
-    Hash: 00000000000000000000000000000000
+    Hash: 564d67d3867d6a25056dce11a82e7756
   m_ForcedFallbackFormat: 4
   m_DownscaleFallback: 0
   m_IsAlphaChannelOptional: 0

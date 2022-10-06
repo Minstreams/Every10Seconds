@@ -7,7 +7,7 @@ namespace IceEngine
 {
     public class WeaponGun : Weapon
     {
-        [Header("效果")]
+        [Group("效果")]
         public AudioSource shotSound;
         public ParticleSystem shotParts;
         public ParticleSystem ammoParts;
@@ -27,7 +27,7 @@ namespace IceEngine
         public float forceBackward = 0.1f;
         public float forceReboundRate = 0.1f;
 
-        [Header("属性")]
+        [Group("属性")]
         public float maxDis = 100;
         public int maxAmmo = 15;
         public float harm = 20;
@@ -38,11 +38,11 @@ namespace IceEngine
         public float accurate = 0;
         public bool goThroughEnemies;
 
-        [Header("UI")]
+        [Group("UI")]
         public GameObject slotPrefab;
         public Transform aimMark;
 
-        [Header("装弹")]
+        [Group("装弹")]
         public AudioSource reloadSound;
         public AudioSource reloadedSound;
         public AudioSource emptySound;

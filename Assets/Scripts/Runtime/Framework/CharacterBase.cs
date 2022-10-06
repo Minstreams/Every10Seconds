@@ -11,7 +11,7 @@ namespace IceEngine
     public abstract class CharacterBase : TimerBehaviour
     {
         #region Life
-        [Header("状态参数")]
+        [Group("状态参数")]
         public float maxHp = 100;
         [NonSerialized] public float hp;
         [NonSerialized] public bool isDead;
@@ -71,7 +71,7 @@ namespace IceEngine
         float rotateParameter = 0;  //动画参数
         float rotateAc = 0;  //加速度
 
-        [Header("移动参数")]
+        [Group("移动参数")]
         public Transform focusPoint;
         [Label("旋转速率"), Range(0.001f, 1)] public float rotateRate = 0.07f;
         [Label("转身阈值"), Range(0.001f, 1)] public float flipThreshold = 0.1f;

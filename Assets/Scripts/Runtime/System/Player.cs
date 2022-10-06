@@ -54,14 +54,14 @@ namespace IceEngine
         #endregion
 
         #region Move
-        [Header("移动参数")]
+        [Group("移动参数")]
         public float baseSpeed = 2;
         public float gravity = 9.8f;
         CharacterController cha;
         #endregion
 
         #region Weapon
-        [Header("武器参数")]
+        [Group("武器参数")]
         public Transform posHand;
         public Transform posWeaponBasic;
         public Transform posWeaponMain;

@@ -7,7 +7,7 @@ namespace IceEngine
 {
     public class Item : Handable
     {
-        [Header("UI")]
+        [Group("UI")]
         public GameObject slotPrefab;
         public Transform aimMark;
         public Sprite icon;
