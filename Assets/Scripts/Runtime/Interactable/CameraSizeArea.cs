@@ -9,10 +9,9 @@ namespace IceEngine
 #if UNITY_EDITOR
         void OnDrawGizmos()
         {
+            using var _ = new GizmosColorScope(isShelter ? Color.cyan : Color.red);
             var box = GetComponent<BoxCollider>();
-            Gizmos.color = isShelter ? Color.cyan : Color.red;
             Gizmos.DrawWireCube(transform.position + box.center, box.size);
-            Gizmos.color = Color.white;
         }
 #endif
         public float size = 2;

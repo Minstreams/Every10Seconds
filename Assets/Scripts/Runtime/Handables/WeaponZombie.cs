@@ -15,9 +15,8 @@ namespace IceEngine
         bool IsInRange => Vector3.Distance(Ice.Gameplay.Player.focusPoint.position, transform.position) < range;
         void OnDrawGizmos()
         {
-            Gizmos.color = Color.red;
+            using var _ = new GizmosColorScope(Color.red);
             Gizmos.DrawWireSphere(transform.position, range);
-            Gizmos.color = Color.white;
         }
         public override void OnUpdate()
         {

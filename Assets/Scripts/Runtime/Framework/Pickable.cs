@@ -96,9 +96,8 @@ namespace IceEngine
             var col = GetComponent<SphereCollider>();
             if (col != null)
             {
-                Gizmos.color = Color.yellow;
+                using var _ = new GizmosColorScope(Color.yellow);
                 Gizmos.DrawWireSphere(col.transform.position + col.center, col.radius);
-                Gizmos.color = Color.white;
             }
         }
     }

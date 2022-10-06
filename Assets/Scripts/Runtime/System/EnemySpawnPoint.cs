@@ -66,7 +66,7 @@ namespace IceEngine
         {
             void DrawDisc(float radius, Color color)
             {
-                Gizmos.color = color;
+                using var _ = new GizmosColorScope(color);
                 var c = transform.position;
                 for (float i = 0; i < Mathf.PI * 2; i += Mathf.PI / 16)
                 {
@@ -79,7 +79,6 @@ namespace IceEngine
             DrawDisc(radius, new Color(1, 0.6f, 0, 0.8f));
             DrawDisc(range.x, new Color(0, 0.6f, 1, 1));
             DrawDisc(range.y, new Color(0, 1, 0.6f, 1));
-            Gizmos.color = Color.white;
         }
 
 #if UNITY_EDITOR

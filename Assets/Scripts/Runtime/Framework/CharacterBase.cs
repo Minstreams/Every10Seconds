@@ -19,12 +19,15 @@ namespace IceEngine
         {
             if (!isDead)
             {
-                Gizmos.color = Color.red;
-                Gizmos.DrawWireCube(transform.position + Vector3.up * 1.2f, new Vector3(1, 0.1f, 0.1f));
-                Gizmos.color = Color.green;
-                var h = hp / maxHp;
-                Gizmos.DrawCube(transform.position + new Vector3(-0.5f + 0.5f * h, 1.2f, 0), new Vector3(h, 0.1f, 0.1f));
-                Gizmos.color = Color.white;
+                using (new GizmosColorScope(Color.red))
+                {
+                    Gizmos.DrawWireCube(transform.position + Vector3.up * 1.2f, new Vector3(1, 0.1f, 0.1f));
+                }
+                using (new GizmosColorScope(Color.green))
+                {
+                    var h = hp / maxHp;
+                    Gizmos.DrawCube(transform.position + new Vector3(-0.5f + 0.5f * h, 1.2f, 0), new Vector3(h, 0.1f, 0.1f));
+                }
             }
         }
         public virtual void SpawnAt(Vector3 pos)

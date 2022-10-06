@@ -18,9 +18,8 @@ namespace IceEngine
         public bool valid = true;
         void OnDrawGizmos()
         {
-            Gizmos.color = new Color(valid ? 0 : 1, valid ? 1 : 0, 0, 0.3f);
+            using var _ = new GizmosColorScope(new Color(valid ? 0 : 1, valid ? 1 : 0, 0, 0.3f));
             Gizmos.DrawWireSphere(transform.position, 0.5f);
-            Gizmos.color = Color.white;
         }
 
 #if UNITY_EDITOR
