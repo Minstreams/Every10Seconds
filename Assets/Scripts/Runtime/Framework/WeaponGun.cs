@@ -144,12 +144,13 @@ namespace IceEngine
                 hitParts.Emit(UnityEngine.Random.Range(1, 4));
                 hitSound.Play();
 
-                if (hit.collider.gameObject.layer == 10 /*Enemy*/)
+                if (hit.rigidbody != null)
                 {
-                    if (hit.rigidbody != null)
-                    {
-                        hit.rigidbody.AddForce(15 * push * ammoDir, ForceMode.Impulse);
-                    }
+                    hit.rigidbody.AddForce(15 * push * ammoDir, ForceMode.Impulse);
+                }
+
+                if (hit.collider.gameObject.layer == Setting.LayerEnemy)
+                {
                     var e = hit.collider.GetComponentInParent<Enemy>();
                     e.Harm(harm, ammoDir * push);
                     Ice.Gameplay.Data.ammos++;

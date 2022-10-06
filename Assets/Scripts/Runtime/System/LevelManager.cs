@@ -14,7 +14,7 @@ namespace IceEngine
     {
         public Player Player => Ice.Gameplay.Player;
         public UICanvasManager UIMgr => Ice.Gameplay.UIMgr;
-        IceEngine.Internal.SettingGameplay Setting => Ice.Gameplay.Setting;
+        public static Internal.SettingGameplay Setting => Ice.Gameplay.Setting;
 
         public Light sun;
         public AnimationCurve intensityCurve;

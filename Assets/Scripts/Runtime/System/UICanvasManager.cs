@@ -8,7 +8,7 @@ namespace IceEngine
     public class UICanvasManager : MonoBehaviour
     {
         Player Player => Ice.Gameplay.Player;
-        IceEngine.Internal.SettingGameplay Setting => Ice.Gameplay.Setting;
+        public static Internal.SettingGameplay Setting => Ice.Gameplay.Setting;
         Ice.Gameplay.PlayerData Data => Ice.Gameplay.Data;
 
         void Awake()

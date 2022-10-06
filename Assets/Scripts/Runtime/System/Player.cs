@@ -67,7 +67,6 @@ namespace IceEngine
         public Transform posWeaponMain;
         public Transform posGrenade;
         public Transform posItem;
-        public LayerMask aimMask;
 
         HandEmpty handEmpty;
         public override Handable CurrentInHand => currentInHand;
@@ -115,7 +114,7 @@ namespace IceEngine
             if (generatePickable)
             {
                 Vector3 dropPos = posHand.position;
-                if (Physics.Raycast(dropPos, Vector3.down, out RaycastHit hit, 100, 1 << LayerMask.NameToLayer("Ground")))
+                if (Physics.Raycast(dropPos, Vector3.down, out RaycastHit hit, 100, 1 << Setting.LayerGround))
                 {
                     dropPos = hit.point;
                 }
@@ -222,7 +221,7 @@ namespace IceEngine
 
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Debug.DrawRay(ray.origin, ray.direction * 100);
-            int mask = CurrentInHand.aimEnemy ? aimMask : (aimMask ^ (1 << 11));
+            int mask = CurrentInHand.aimEnemy ? Setting.maskPlayerAim | (1 << Setting.LayerEnemyAimBox) : Setting.maskPlayerAim;
             if (Physics.Raycast(ray, out var raycastHit, 100, mask))
             {
                 if (CurrentInHand.aimEnemy && raycastHit.collider.CompareTag("Enemy"))

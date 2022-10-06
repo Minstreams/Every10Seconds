@@ -8,17 +8,15 @@ namespace IceEngine
     public abstract class Pickable : PlayerTrigger
     {
         #region Static
-        static int? layerPick;
-        static int? layerPickSelected;
         public static List<Pickable> toPickList = new();
         static void OnPrePick(Pickable p)
         {
-            p.meshObj.layer = layerPickSelected ??= LayerMask.NameToLayer("PickableSelected");
+            p.meshObj.layer = Setting.LayerPickableSelected;
             Ice.Gameplay.UIMgr.hintText.text = "E " + p.hint;
         }
         static void OnCancelPick(Pickable p)
         {
-            p.meshObj.layer = layerPick ??= LayerMask.NameToLayer("Pickable");
+            p.meshObj.layer = Setting.LayerPickable;
             Ice.Gameplay.UIMgr.hintText.text = "";
         }
         public static void ToPick(Pickable p)

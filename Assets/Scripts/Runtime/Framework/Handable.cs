@@ -7,6 +7,8 @@ namespace IceEngine
 {
     public class Handable : MonoBehaviour
     {
+        public static Internal.SettingGameplay Setting => Ice.Gameplay.Setting;
+
         /// <summary>
         /// 瞄准的方向，影响转身判定，0为正前方，-90为正左方
         /// </summary>

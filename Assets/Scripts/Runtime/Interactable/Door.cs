@@ -17,13 +17,13 @@ namespace IceEngine
         protected override void OnPlayerEnter()
         {
             base.OnPlayerEnter();
-            doorMesh.layer = LayerMask.NameToLayer("PickableSelected");
+            doorMesh.layer = Setting.LayerPickableSelected;
         }
         protected override void OnPlayerExit()
         {
             base.OnPlayerExit();
             doorObj.SetActive(true);
-            doorMesh.layer = LayerMask.NameToLayer("Wall");
+            doorMesh.layer = Setting.LayerWall;
         }
     }
 }

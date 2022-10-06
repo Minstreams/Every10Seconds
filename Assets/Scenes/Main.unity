@@ -30002,6 +30002,10 @@ MonoBehaviour:
   time: 3
   hitTimeCost: 0
   range: 3
+  harmPlayer: 1
+  onExplode:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &6550604274097153847
 PrefabInstance:
   m_ObjectHideFlags: 0

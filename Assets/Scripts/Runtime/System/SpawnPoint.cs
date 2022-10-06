@@ -14,6 +14,8 @@ namespace IceEngine
     [ExecuteInEditMode]
     public class SpawnPoint : MonoBehaviour
     {
+        public static Internal.SettingGameplay Setting => Ice.Gameplay.Setting;
+
         [HideInInspector]
         public bool valid = true;
         void OnDrawGizmos()
@@ -50,7 +52,7 @@ namespace IceEngine
         [Button("放于地面")]
         public void PutOnGround()
         {
-            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 100, 1 << LayerMask.NameToLayer("Ground"), QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 100, 1 << Setting.LayerGround, QueryTriggerInteraction.Ignore))
             {
                 transform.position = hit.point;
             }

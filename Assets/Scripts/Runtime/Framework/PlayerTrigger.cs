@@ -7,6 +7,8 @@ namespace IceEngine
     [ExecuteInEditMode]
     public class PlayerTrigger : MonoBehaviour
     {
+        public static Internal.SettingGameplay Setting => Ice.Gameplay.Setting;
+
 #if UNITY_EDITOR
         protected virtual void Awake()
         {

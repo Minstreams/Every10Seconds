@@ -94,7 +94,7 @@ namespace IceEngine
         [Button("放于地面")]
         public void PutOnGround()
         {
-            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 100, 1 << LayerMask.NameToLayer("Ground"), QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 100, 1 << Setting.LayerGround, QueryTriggerInteraction.Ignore))
             {
                 transform.position = hit.point;
             }

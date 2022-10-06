@@ -6,6 +6,8 @@ namespace IceEngine
 {
     public class TimerBehaviour : MonoBehaviour
     {
+        public static Internal.SettingGameplay Setting => Ice.Gameplay.Setting;
+
         void OnEnable()
         {
 #if UNITY_EDITOR
