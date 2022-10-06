@@ -29,7 +29,7 @@ namespace IceEngine
             var t = disXZ / speed;
             var speedY = (vec.y - 0.5f * g * t * t) / t;
 
-            GetComponent<Rigidbody>().velocity = vecXZ * speed + Vector3.up * speedY;
+            GetComponent<Rigidbody>().velocity = vecXZ.normalized * speed + Vector3.up * speedY;
 
             StartTick();
         }
@@ -54,6 +54,7 @@ namespace IceEngine
             onExplode?.Invoke();
             var cols = Physics.OverlapSphere(Center.position, info.range, mask, QueryTriggerInteraction.Ignore);
             HashSet<Enemy> hittedEnemySet = new();
+            bool hittedPlayer = false;
             foreach (var col in cols)
             {
                 var vec = col.transform.position - Center.position;
@@ -76,6 +77,15 @@ namespace IceEngine
                             hittedEnemySet.Add(e);
                             e.Harm(info.harm, dir * p);
                         }
+                    }
+                }
+                else if (info.harmPlayer && col.gameObject.layer == Setting.LayerPlayer)
+                {
+                    var pl = col.GetComponentInParent<Player>();
+                    if (pl != null && !hittedPlayer)
+                    {
+                        hittedPlayer = true;
+                        pl.Harm(info.harm, dir * p);
                     }
                 }
             }

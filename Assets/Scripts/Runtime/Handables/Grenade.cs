@@ -23,6 +23,8 @@ namespace IceEngine
 
             var pg = p as PickableGrenade;
             info = pg.info;
+
+            aimMark.gameObject.SetActive(false);
         }
         public override void OnDrop(Pickable p)
         {
@@ -45,7 +47,7 @@ namespace IceEngine
             ins.transform.position = transform.position;
             ins.ThrowTo(AimPos, throwSpeed);
 
-            Ice.Gameplay.Player.DropGrenade(true);
+            Ice.Gameplay.Player.DropGrenade(false);
         }
     }
 

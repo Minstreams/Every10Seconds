@@ -46,6 +46,7 @@ namespace Ice
         public static Dialog curDialog;
         public static void StartDialog(Dialog dialog, string npcName)
         {
+            if (dialog == null) return;
             UIMgr.SetDialogNPC(currentNPC = npcName);
             curDialog = dialog;
             UIMgr.DisplayDialogBlock(dialog.blockList[0]);
@@ -95,6 +96,7 @@ namespace Ice
         static void Awake()
         {
             LoadData();
+            Physics.IgnoreLayerCollision(Setting.LayerGrenade, Setting.LayerPlayer);
         }
 
         [IcePacket]

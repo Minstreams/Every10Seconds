@@ -154,6 +154,12 @@ namespace IceEngine
                 {
                     currentInHand.transform.SetParent(posItem, false);
                 }
+                else
+                {
+                    // grenade
+                    var g = currentInHand as Grenade;
+                    g.transform.SetParent(posGrenadeList[g.ID], false);
+                }
                 currentInHand.transform.localRotation = Quaternion.identity;
 
                 currentInHand.OnSwitchOff();
@@ -291,6 +297,8 @@ namespace IceEngine
                 var g = grenadeList[i];
                 g.ID = i;
                 g.OnPlacedInSlot(g.GetSlot().Load(g.slotPrefab).GetComponent<SlotItem>());
+                g.transform.SetParent(posGrenadeList[g.ID], false);
+                g.OnSwitchOff();
             }
         }
         public void PickGrenade(PickableGrenade p)
@@ -303,17 +311,31 @@ namespace IceEngine
             g.ID = grenadeList.Count;
             g.OnPick(p, g.GetSlot().Load(g.slotPrefab).GetComponent<SlotBase>());
             grenadeList.Add(g);
+            g.transform.SetParent(posGrenadeList[g.ID], false);
+            if (CurrentInHand == handEmpty || CurrentInHand is Grenade) SwitchToGrenade();
         }
         public void SwitchToGrenade()
         {
-            SwitchTo(grenadeList[^1]);
+            SwitchTo(grenadeList.Count == 0 ? null : grenadeList[^1]);
             Ice.Gameplay.UIMgr.OnSwitchSlot(4);
         }
         public void DropGrenade(bool generatePickable = true)
         {
             if (grenadeList.Count == 0) return;
-            Drop(grenadeList[^1], generatePickable);
+
+            var g = grenadeList[^1];
+            bool holding = g == CurrentInHand;
+            Drop(g, generatePickable);
             grenadeList.RemoveAt(grenadeList.Count - 1);
+
+            if (holding)
+            {
+                if (grenadeList.Count == 0)
+                    if (weaponMain != null)
+                        SwitchToWeaponMain();
+                    else SwitchToWeaponBasic();
+                else SwitchToGrenade();
+            }
         }
         public void DropLastGrenade(bool generatePickable = true)
         {

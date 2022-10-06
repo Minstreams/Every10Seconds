@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1419459529042656414}
   - component: {fileID: 1419459529042656413}
   m_Layer: 14
-  m_Name: GrenadeIns01
+  m_Name: GrenadeIns02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -197,7 +197,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -5417936693086006980, guid: 90be28c3b23c6444dbb95dcf739e959e, type: 3}
+  - {fileID: -5417936693086006980, guid: 4663562fecd77af40b2495582160bee1, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

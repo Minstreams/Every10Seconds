@@ -1756,7 +1756,7 @@ MonoBehaviour:
         - m_Target: {fileID: 5315880134884424812}
           m_TargetAssemblyTypeName: IceEngine.GunShootBtn, IceRuntime
           m_MethodName: OnShoot
-          m_Mode: 1
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1772,7 +1772,7 @@ MonoBehaviour:
         - m_Target: {fileID: 5315880134884424812}
           m_TargetAssemblyTypeName: IceEngine.GunShootBtn, IceRuntime
           m_MethodName: OnReleseShoot
-          m_Mode: 1
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2518,7 +2518,7 @@ PrefabInstance:
     - target: {fileID: 1308512982565225319, guid: 6b296976e16fbcb4082ab60f65d9eb5d,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 64
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 1308512982565225319, guid: 6b296976e16fbcb4082ab60f65d9eb5d,
         type: 3}

@@ -22,5 +22,6 @@ namespace IceEngine.Internal
         public int LayerPickable => _layerPickable ??= LayerMask.NameToLayer("Pickable"); int? _layerPickable;
         public int LayerPickableSelected => _layerPickableSelected ??= LayerMask.NameToLayer("PickableSelected"); int? _layerPickableSelected;
         public int LayerWall => _layerWall ??= LayerMask.NameToLayer("Wall"); int? _layerWall;
+        public int LayerGrenade => _layerGrenade ??= LayerMask.NameToLayer("Grenade"); int? _layerGrenade;
     }
 }

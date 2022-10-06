@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2070515233634793131}
   - component: {fileID: 6475539423320638397}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Prop11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 7926503538886184875}
   - component: {fileID: 759317921146547341}
   - component: {fileID: 4263423532958327940}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 8081329169993986892}
   - component: {fileID: 4189132565262788420}
   - component: {fileID: 4670593187276695687}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
