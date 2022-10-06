@@ -6,7 +6,7 @@ using Sys = Ice.Gameplay;
 
 namespace IceEngine
 {
-    public class NPC : Pickable
+    public class NPC : Interactable
     {
         public string npcName;
         public List<Dialog> dialogs = new();

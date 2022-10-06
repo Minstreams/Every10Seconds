@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 namespace IceEngine
 {
     public class PickableGrenade : Pickable
     {
-        public GameObject prefab;
+
 
         public override bool OnPick()
         {

@@ -123,7 +123,7 @@ namespace IceEngine
         {
             while (true)
             {
-                Pickable.OnBattleUpdate();
+                Interactable.OnBattleUpdate();
                 hpBar.anchorMin = new Vector2(1 - Player.hp / Player.maxHp, 0);
                 yield return 0;
             }

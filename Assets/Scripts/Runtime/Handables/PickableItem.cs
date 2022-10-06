@@ -6,8 +6,6 @@ namespace IceEngine
 {
     public class PickableItem : Pickable
     {
-        public GameObject prefab;
-
         public override bool OnPick()
         {
             Ice.Gameplay.Player.PickItem(this);

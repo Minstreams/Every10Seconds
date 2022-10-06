@@ -26,7 +26,7 @@ namespace IceEngine
         void Start()
         {
             // 清除上一局状态
-            Pickable.toPickList.Clear();
+            Interactable.toPickList.Clear();
 
             // 初始化战斗UI
             UIMgr.OpenEye();

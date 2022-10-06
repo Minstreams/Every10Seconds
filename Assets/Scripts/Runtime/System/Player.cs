@@ -161,6 +161,10 @@ namespace IceEngine
             }
             currentInHand = h;
         }
+        void Pick(Pickable p)
+        {
+
+        }
         public void Drop(Handable h, bool generatePickable = true)
         {
             if (h == null) return;
@@ -286,9 +290,17 @@ namespace IceEngine
 
         List<Grenade> grenadeList = new();
 
-        public void PickGrenade(PickableGrenade p)
+        void PlaceAllGrenades()
         {
 
+        }
+        public void PickGrenade(PickableGrenade p)
+        {
+            if (isDead) return;
+            if (grenadeList.Count >= grenadeCount) DropGrenade();
+
+            var g = GameObject.Instantiate(p.prefab).GetComponent<Grenade>();
+            g.owner = this;
         }
         public void DropGrenade(bool generatePickable = true)
         {

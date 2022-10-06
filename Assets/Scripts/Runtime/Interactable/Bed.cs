@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace IceEngine
 {
-    public class Bed : Pickable
+    public class Bed : Interactable
     {
         public Transform pos;
         public override bool OnPick()

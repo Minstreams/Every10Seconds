@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace IceEngine
 {
-    public class Door : Pickable
+    public class Door : Interactable
     {
         public GameObject doorObj;
         public GameObject doorMesh;

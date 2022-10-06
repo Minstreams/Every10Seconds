@@ -7,7 +7,7 @@ namespace IceEngine
     /// <summary>
     /// 弹药箱
     /// </summary>
-    public class MagPack : Pickable
+    public class MagPack : Interactable
     {
         public AudioSource onPickSound;
         public AudioSource notValidSound;

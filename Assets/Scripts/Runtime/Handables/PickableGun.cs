@@ -10,7 +10,6 @@ namespace IceEngine
     public class PickableGun : Pickable
     {
         public WeaponSlotType type;
-        public GameObject prefab;
         public int ammo = 15;
         public int mag = 15;
         public override bool OnPick()
