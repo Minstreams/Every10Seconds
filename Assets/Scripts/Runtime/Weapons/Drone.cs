@@ -15,8 +15,11 @@ namespace IceEngine
             Ice.Gameplay.CurLevel.OnDroneEnterShelter();
             go.GetComponent<DroneEffectHolder>().Play(() =>
             {
-                Ice.Gameplay.UIMgr.ShowNotification($"You drone has brought your {coin} {Ice.Gameplay.Setting.coinMark} " +
-                $"to basement");
+                if (Ice.Gameplay.UIMgr != null)
+                {
+                    Ice.Gameplay.UIMgr.ShowNotification($"You drone has brought your {coin} {Ice.Gameplay.Setting.coinMark} " +
+                    $"to basement");
+                }
                 Destroy(go);
             });
         }

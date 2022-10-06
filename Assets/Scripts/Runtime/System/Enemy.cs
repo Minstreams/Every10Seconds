@@ -74,7 +74,7 @@ namespace IceEngine
             aimBox.enabled = false;
             weapon.gameObject.SetActive(false);
             Ice.Gameplay.Data.enemiesBeaten++;
-            Ice.Gameplay.CurLevel.AddCoin(coin);
+            Ice.Gameplay.Player.AddCoin(coin, focusPoint.position);
         }
 
         protected override void OnMorning()

@@ -17,6 +17,10 @@ namespace IceEngine
         public float pulseRate = 1;
 
         Vector3 targetPos;
+        void Awake()
+        {
+            Ice.Gameplay.CamMgr = this;    
+        }
         void Update()
         {
             var offset = Ice.Gameplay.Player.focusPoint.position - transform.position;

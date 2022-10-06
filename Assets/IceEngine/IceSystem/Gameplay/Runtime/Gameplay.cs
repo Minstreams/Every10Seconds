@@ -24,10 +24,10 @@ namespace Ice
 #if UNITY_EDITOR
             if (!UnityEditor.EditorApplication.isPlaying) return null;
 #endif
-            if (field == null)
+            if (field is null)
             {
                 field = Obj.FindObjectOfType<T>();
-                if (field == null)
+                if (field is null)
                 {
                     field = GameObject.Instantiate(prefab).GetComponent<T>();
                 }
@@ -37,7 +37,7 @@ namespace Ice
         #endregion
 
         public static Player Player => GetGlobalComponent(ref _player, Setting.playerPrefab); static Player _player;
-        public static CameraMgr CamMgr => GetGlobalComponent(ref _camMgr, Setting.cameraMgrPrefab); static CameraMgr _camMgr;
+        public static CameraMgr CamMgr { get; set; }
         public static UICanvasManager UIMgr => GetGlobalComponent(ref _uiMgr, Setting.uiCanvasManagerPrefab); static UICanvasManager _uiMgr;
 
 

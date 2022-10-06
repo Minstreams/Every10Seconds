@@ -319,7 +319,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b9eaba3ba433b2b4caa5bfb57d06ef4d, type: 2}
+  - {fileID: 2100000, guid: 456202220d0b07b49b821828221e1d7e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -891,7 +891,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3767370076977414084}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: fdcb1d8ec51150140b74db5eb02f2d93, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 6462fbc48655e484aac354ed9166bd39, type: 3}
   m_Controller: {fileID: 9100000, guid: 2dc026d79db72c540837c6f86346086a, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
@@ -1344,6 +1344,7 @@ MonoBehaviour:
   ikLeftHand: 0
   ikRightHand: 0
   pickablePrefab: {fileID: 0}
+  aimEnemy: 1
   interval: 4
   range: 1
   harm: 5

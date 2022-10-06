@@ -1016,6 +1016,7 @@ MonoBehaviour:
   ikLeftHand: 0
   ikRightHand: 0
   pickablePrefab: {fileID: 0}
+  aimEnemy: 1
   interval: 4
   range: 1
   harm: 5
@@ -1844,7 +1845,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b71582c857b3db54cb96ebb8127b2c7b, type: 2}
+  - {fileID: 2100000, guid: 456202220d0b07b49b821828221e1d7e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

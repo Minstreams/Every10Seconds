@@ -38,6 +38,18 @@ namespace IceEngine
             DropWeaponBasic();
             DropWeaponMain();
             cha.enabled = false;
+            StopAllCoroutines();
+        }
+        public void Sleep()
+        {
+            if (isDead) return;
+            base.Die(Vector3.zero);
+            DropItem();
+            DropWeaponBasic();
+            DropWeaponMain();
+            Ice.Gameplay.CurLevel.Sleep();
+            cha.enabled = false;
+            StopAllCoroutines();
         }
         #endregion
 
@@ -182,6 +194,24 @@ namespace IceEngine
             if (currentInHand == item) currentInHand = handEmpty;
             Drop(item, generatePickable);
             item = null;
+        }
+        #endregion
+
+        #region Effects
+        public ParticleSystem coinEmitter;
+        const float coinDelayTime = 1.5f;
+        readonly WaitForSeconds coinDelay = new(coinDelayTime);
+        public void AddCoin(int coin, Vector3 pos)
+        {
+            if (isDead) return;
+            coinEmitter.transform.position = pos;
+            coinEmitter.Emit(coin);
+            StartCoroutine(RunAddCoin(coin));
+        }
+        IEnumerator RunAddCoin(int coin)
+        {
+            yield return coinDelay;
+            Ice.Gameplay.CurLevel.AddCoin(coin);
         }
         #endregion
 

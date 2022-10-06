@@ -1109,28 +1109,7 @@ MonoBehaviour:
   hint: Talk To Him
   npcName: Him
   dialogs:
-  - condition:
-      alwaysTrue: 1
-    blockList:
-    - content: Hey, you are awake
-      dialogChoices:
-      - content: aha
-        nextId: 1
-        action:
-          m_PersistentCalls:
-            m_Calls: []
-    - content: Great
-      dialogChoices:
-      - content: Cool
-        nextId: 0
-        action:
-          m_PersistentCalls:
-            m_Calls: []
-      - content: Bye
-        nextId: -1
-        action:
-          m_PersistentCalls:
-            m_Calls: []
+  - {fileID: 0}
   animTrigger: 
 --- !u!1 &4422445824568881130
 GameObject:
@@ -1218,7 +1197,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 78898d3f4f97e7b40a546b00f0e90090, type: 2}
+  - {fileID: 2100000, guid: 456202220d0b07b49b821828221e1d7e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
