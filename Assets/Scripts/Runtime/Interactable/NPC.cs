@@ -8,7 +8,6 @@ namespace IceEngine
 {
     public class NPC : Interactable
     {
-        public string npcName;
         public List<Dialog> dialogs = new();
         public string animTrigger = null;
 
@@ -43,7 +42,7 @@ namespace IceEngine
         }
         public override bool OnPick()
         {
-            Sys.StartDialog(GetDialog(), npcName);
+            Sys.StartDialog(GetDialog(), this);
             return true;
         }
     }

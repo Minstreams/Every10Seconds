@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90bf1f6328ff07645984413696b44572, type: 3}
+  m_Name: DialogTest
+  m_EditorClassIdentifier: 
+  npcName: Test
+  condition:
+    alwaysTrue: 1
+  blockList:
+  - content: Hi, Nice to meet you.
+    dialogChoices:
+    - content: Err, Bye
+      nextId: 1
+      npcAction: 
+    - content: Ignore.
+      nextId: -1
+      npcAction: 
+  - content: bye
+    dialogChoices:
+    - content: Bye
+      nextId: -1
+      npcAction: 
+    - content: Again??
+      nextId: 0
+      npcAction: 

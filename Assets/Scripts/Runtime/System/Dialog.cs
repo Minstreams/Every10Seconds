@@ -10,6 +10,7 @@ namespace IceEngine
     [CreateAssetMenu(fileName = "Dialog", menuName = "对话")]
     public class Dialog : ScriptableObject
     {
+        public string npcName;
         public Condition condition = new();
         public List<DialogBlock> blockList = new();
     }
@@ -24,7 +25,7 @@ namespace IceEngine
     {
         public string content;
         public int nextId;
-        public UnityEvent action;
+        public string npcAction;
     }
 
     [Serializable]

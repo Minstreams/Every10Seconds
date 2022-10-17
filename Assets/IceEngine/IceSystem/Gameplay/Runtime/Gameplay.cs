@@ -41,13 +41,14 @@ namespace Ice
         public static UICanvasManager UIMgr => GetGlobalComponent(ref _uiMgr, Setting.uiCanvasManagerPrefab); static UICanvasManager _uiMgr;
 
 
-        #region Dialog
-        public static string currentNPC = null;
+        #region Dialog & NPC
+        public static NPC currentNPC = null;
         public static Dialog curDialog;
-        public static void StartDialog(Dialog dialog, string npcName)
+        public static void StartDialog(Dialog dialog, NPC npc)
         {
             if (dialog == null) return;
-            UIMgr.SetDialogNPC(currentNPC = npcName);
+            currentNPC = npc;
+            UIMgr.SetDialogNPC(dialog.npcName);
             curDialog = dialog;
             UIMgr.DisplayDialogBlock(dialog.blockList[0]);
         }
@@ -64,6 +65,11 @@ namespace Ice
             currentNPC = null;
             curDialog = null;
             UIMgr.CloseDialog();
+        }
+        public static void DoNPCAction(string action)
+        {
+            if (action.IsNullOrEmpty()) return;
+            // TODO
         }
         #endregion
 

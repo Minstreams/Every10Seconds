@@ -175,7 +175,7 @@ namespace IceEngine
                 c.btn.onClick.AddListener(() =>
                 {
                     Ice.Gameplay.ToDialogBlock(cc.nextId);
-                    cc.action?.Invoke();
+                    Ice.Gameplay.DoNPCAction(cc.npcAction);
                 });
                 choices.Add(c);
             }
