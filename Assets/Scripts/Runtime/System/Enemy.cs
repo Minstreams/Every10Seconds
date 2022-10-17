@@ -13,9 +13,12 @@ namespace IceEngine
         public float chaseDistance;
         public int type;
         public int coin = 1;
+        [Label("光耐受")] public float lightThres = 1;
         public override Handable CurrentInHand => weapon;
 
+        Light Sun => Ice.Gameplay.CurLevel.sun;
         [System.NonSerialized] public NavMeshAgent nav;
+        [System.NonSerialized] public float extraLight = 0;
         protected override void Awake()
         {
             base.Awake();
@@ -26,12 +29,12 @@ namespace IceEngine
         {
             if (isDead) return;
 
-            if (IsMorning)
+            float light = Physics.Raycast(focusPoint.position, -Sun.transform.forward, 50, Setting.MaskGroundAndWall) ? 0 : Sun.intensity;
+            light += extraLight;
+
+            if (light < lightThres)
             {
-                Move(transform.forward, 0, transform.forward);
-            }
-            else
-            {
+                // In Shadow
                 var p = Ice.Gameplay.Player.transform.position;
                 var pp = transform.position;
                 var sightDir = (p - pp).normalized;
@@ -45,6 +48,12 @@ namespace IceEngine
 
                 CurrentInHand.OnUpdate();
             }
+            else
+            {
+                // In Light
+                if (nav.hasPath) nav.ResetPath();
+                Move(transform.forward, 0, transform.forward);
+            }
         }
 
 
@@ -53,7 +62,7 @@ namespace IceEngine
             base.SpawnAt(pos);
             hp = maxHp;
             nav.enabled = true;
-            hitBox.enabled = true;
+            hitBox.gameObject.SetActive(true);
             aimBox.enabled = true;
             weapon.gameObject.SetActive(true);
             anim.SetFloat("type", type);
@@ -70,17 +79,11 @@ namespace IceEngine
             base.Die(push);
             nav.ResetPath();
             nav.enabled = false;
-            hitBox.enabled = false;
+            hitBox.gameObject.SetActive(false);
             aimBox.enabled = false;
             weapon.gameObject.SetActive(false);
             Ice.Gameplay.Data.enemiesBeaten++;
             Ice.Gameplay.Player.AddCoin(coin, focusPoint.position);
-        }
-
-        protected override void OnMorning()
-        {
-            if (isDead) return;
-            nav.ResetPath();
         }
     }
 }

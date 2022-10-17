@@ -198,6 +198,7 @@ namespace IceEngine
         }
         public void UseCurrent()
         {
+            if (isDead) return;
             CurrentInHand.OnUse();
         }
         public void ReleaseCurrent()
@@ -346,7 +347,9 @@ namespace IceEngine
         }
         public void ThrowGrenade()
         {
-            grenadeList[^1].OnUse();
+            if (isDead) return;
+            if (grenadeList.Count > 0)
+                grenadeList[^1].OnUse();
         }
         #endregion
 

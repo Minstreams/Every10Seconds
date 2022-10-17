@@ -15,6 +15,8 @@ namespace IceEngine.Internal
         [Group]
         public LayerMask maskPlayerAim;
 
+        public LayerMask MaskGroundAndWall => (1 << LayerGround) | (1 << LayerWall);
+
         public int LayerPlayer => _layerPlayer ??= LayerMask.NameToLayer("Player"); int? _layerPlayer;
         public int LayerEnemy => _layerEnmey ??= LayerMask.NameToLayer("Enemy"); int? _layerEnmey;
         public int LayerEnemyAimBox => _layerEnmeyAimBox ??= LayerMask.NameToLayer("EnemyAimBox"); int? _layerEnmeyAimBox;

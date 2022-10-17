@@ -19,6 +19,7 @@ namespace IceEngine
         public Vector2 range;
         public Vector2 timeRange;
         public Vector2Int coinRange;
+        public Vector2 lightThresRange = Vector2.one;
         public float weaponInterval = 5;
         public float weaponRange = 2;
         public float weaponHarm = 5;
@@ -45,6 +46,7 @@ namespace IceEngine
                         e.maxHp = health;
                         e.nav.speed = speed;
                         e.coin = Random.Range(coinRange.x, coinRange.y + 1);
+                        e.lightThres = Random.Range(lightThresRange.x, lightThresRange.y);
                         if (e.CurrentInHand is WeaponZombie wz)
                         {
                             wz.interval = weaponInterval;
